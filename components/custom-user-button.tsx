@@ -4,12 +4,13 @@ import { Button } from "@/components/ui/button"
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog"
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
 import { useClerk, useUser } from "@clerk/nextjs"
-import { LogOut, Settings, Shield, User } from 'lucide-react'
+import { LogOut, Menu, Settings, Shield, User } from 'lucide-react'
 import Image from "next/image"
 import React, { createContext, Fragment, useContext, useEffect, useState, type ReactNode } from "react"
 import ProfileTab from "./clerk/profile-tab"
 import ProtectedByClerkFooter from "./clerk/protected-by"
 import SecurityTab from "./clerk/security-tab"
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "./ui/dropdown-menu"
 // Tipos
 type UserProfilePageProps = {
     label: string
@@ -75,7 +76,7 @@ function CustomUserButton({
     const [currentCallback, setCurrentCallback] = useState<((password: string) => Promise<any>) | null>(null)
     const [currentResolve, setCurrentResolve] = useState<((value: any | null) => void) | null>(null)
     const [currentReject, setCurrentReject] = useState<((reason?: any) => void) | null>(null)
-
+    const isMobile = typeof window !== "undefined" && window.innerWidth < 768
 
     // Function that takes a callback and returns a promise
     const requirePassword = async <T,>(callback: (password: string) => Promise<T>): Promise<T | null> => {
@@ -184,7 +185,6 @@ function CustomUserButton({
     const customPagesPortals = React.Children.toArray(children).filter(
         (child) => React.isValidElement(child) && child.type === UserProfileLink,
     ) as React.ReactElement<UserProfilePageProps>[]
-
     return (
         <UserButtonContext.Provider
             value={{
@@ -269,48 +269,81 @@ function CustomUserButton({
 
                 {/* Diálogo de gestión de cuenta predeterminado */}
                 <Dialog open={activeDialog === "manage"} onOpenChange={(open) => !open && setActiveDialog(null)}>
-                    
+
                     <DialogContent className="rounded-xl max-w-4xl p-0 h-[80vh] flex overflow-hidden bg-gray-50">
                         {/* Sidebar */}
-                        <DialogTitle className="hidden"/>
-                        <div className="w-64 border-r h-full bg-gray-200 flex flex-col">
-                            <div className="p-6">
-                                <h2 className="text-xl font-semibold">Account</h2>
-                                <p className="text-gray-500 text-sm">Manage your account info.</p>
+                        <DialogTitle className="hidden" />
+                        {isMobile ? (
+                            <div className="absolute bottom-4 right-4 z-10">
+                                <DropdownMenu>
+                                    <DropdownMenuTrigger asChild>
+                                        <Button
+                                            variant="secondary"
+                                            size="icon"
+                                            className="p-2 bg-gray-800 text-white hover:bg-gray-700 shadow-lg border-2 border-gray-900"
+                                        >
+                                            <Menu className="h-6 w-6" />
+                                        </Button>
+                                    </DropdownMenuTrigger>
+                                    <DropdownMenuContent className="w-48 bg-white rounded-xl shadow-lg">
+                                        <DropdownMenuItem onClick={() => setActiveTab("profile")}>
+                                            <User className="h-4 w-4 mr-2" />
+                                            Profile
+                                        </DropdownMenuItem>
+                                        <DropdownMenuItem onClick={() => setActiveTab("security")}>
+                                            <Shield className="h-4 w-4 mr-2" />
+                                            Security
+                                        </DropdownMenuItem>
+                                        {customPages.map((page, index) => (
+                                            <DropdownMenuItem key={index} onClick={() => setActiveTab(page.props.url)}>
+                                                <span className="mr-2">{page.props.labelIcon}</span>
+                                                {page.props.label}
+                                            </DropdownMenuItem>
+                                        ))}
+                                    </DropdownMenuContent>
+                                </DropdownMenu>
                             </div>
-                            <div className="space-y-1 px-2 flex-1">
-                                <Button
-                                    variant={activeTab === "profile" ? "secondary" : "ghost"}
-                                    className="w-full justify-start gap-2 px-2 py-1.5 text-sm"
-                                    onClick={() => setActiveTab("profile")}
-                                >
-                                    <User className="h-4 w-4" />
-                                    Profile
-                                </Button>
-                                <Button
-                                    variant={activeTab === "security" ? "secondary" : "ghost"}
-                                    className="w-full justify-start gap-2 px-2 py-1.5 text-sm"
-                                    onClick={() => setActiveTab("security")}
-                                >
-                                    <Shield className="h-4 w-4" />
-                                    Security
-                                </Button>
-                                {customPages.map((page, index) => (
+                        ) : (
+                            <div className="w-64 border-r h-full bg-gray-200 flex flex-col">
+                                <div className="p-6">
+                                    <h2 className="text-xl font-semibold">Account</h2>
+                                    <p className="text-gray-500 text-sm">Manage your account info.</p>
+                                </div>
+                                <div className="space-y-1 px-2 flex-1">
                                     <Button
-                                        key={index}
-                                        variant={activeTab === page.props.url ? "secondary" : "ghost"}
+                                        variant={activeTab === "profile" ? "secondary" : "ghost"}
                                         className="w-full justify-start gap-2 px-2 py-1.5 text-sm"
-                                        onClick={() => setActiveTab(page.props.url)}
+                                        onClick={() => setActiveTab("profile")}
                                     >
-                                        {page.props.labelIcon}
-                                        {page.props.label}
+                                        <User className="h-4 w-4" />
+                                        Profile
                                     </Button>
-                                ))}
+                                    <Button
+                                        variant={activeTab === "security" ? "secondary" : "ghost"}
+                                        className="w-full justify-start gap-2 px-2 py-1.5 text-sm"
+                                        onClick={() => setActiveTab("security")}
+                                    >
+                                        <Shield className="h-4 w-4" />
+                                        Security
+                                    </Button>
+                                    {customPages.map((page, index) => (
+                                        <Button
+                                            key={index}
+                                            variant={activeTab === page.props.url ? "secondary" : "ghost"}
+                                            className="w-full justify-start gap-2 px-2 py-1.5 text-sm"
+                                            onClick={() => setActiveTab(page.props.url)}
+                                        >
+                                            {page.props.labelIcon}
+                                            {page.props.label}
+                                        </Button>
+                                    ))}
+                                </div>
+                                <div className="mt-auto">
+                                    <ProtectedByClerkFooter />
+                                </div>
                             </div>
-                            <div className="mt-auto">
-                                <ProtectedByClerkFooter />
-                            </div>
-                        </div>
+                        )}
+
 
                         {/* Contenido principal */}
                         <div className="flex-1 overflow-auto rounded-xl">
