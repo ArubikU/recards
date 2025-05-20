@@ -1,0 +1,278 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --primary: #ff7a00;
+  --primary-dark: #e56e00;
+  --primary-light: #ffa64d;
+}
+
+body {
+  @apply bg-gray-50;
+  font-smooth: always;
+}
+
+/* === Botones === */
+.btn {
+  @apply font-medium px-4 py-2 rounded-md transition-colors;
+}
+
+.btn-primary {
+  @apply btn text-white;
+  background-color: var(--primary);
+}
+
+.btn-primary:hover {
+  background-color: var(--primary-dark);
+}
+
+.btn-secondary {
+  @apply btn text-gray-800 border border-gray-300 bg-white;
+}
+
+.btn-secondary:hover {
+  @apply bg-gray-100;
+}
+
+/* === Tarjetas === */
+.card {
+  @apply bg-white rounded-lg shadow-md overflow-hidden;
+}
+
+.card-header {
+  @apply p-4 border-b border-gray-200;
+}
+
+.card-body {
+  @apply p-4;
+}
+
+/* === Inputs === */
+.input {
+  @apply w-full px-3 py-2 border border-gray-300 rounded-md outline-none transition duration-300;
+}
+
+.input:focus {
+  box-shadow: 0 0 0 2px var(--primary);
+  border-color: transparent;
+}
+
+/* === Utilidades 3D === */
+.backface-hidden {
+  backface-visibility: hidden;
+}
+
+.rotate-y-180 {
+  transform: rotateY(180deg);
+}
+
+.perspective-1000 {
+  perspective: 1000px;
+}
+
+/* === Flashcard Básica === */
+.flashcard {
+  @apply bg-white rounded-lg shadow-md p-6 h-64 flex items-center justify-center text-center cursor-pointer transition-all duration-500;
+  transform-style: preserve-3d;
+  position: relative;
+  perspective: 1000px;
+}
+
+.flashcard-front,
+.flashcard-back {
+  @apply absolute top-0 left-0 w-full h-full;
+  backface-visibility: hidden;
+}
+
+.flashcard-back {
+  transform: rotateY(180deg);
+}
+
+.flashcard.flipped {
+  transform: rotateY(180deg);
+}
+
+/* === Modal === */
+.modal-overlay {
+  @apply fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50;
+}
+
+.modal {
+  @apply bg-white p-6 rounded-lg shadow-xl z-50;
+}
+
+.modal button {
+  @apply m-2 px-4 py-2 rounded-md font-semibold cursor-pointer transition-colors;
+}
+
+.modal button:first-of-type {
+  @apply bg-blue-500 text-white hover:bg-blue-600;
+}
+
+.modal button:last-of-type {
+  @apply bg-gray-200 text-gray-900 hover:bg-gray-300;
+}
+
+/* === Alerts === */
+.alerts {
+  @apply fixed top-4 right-4 z-[1000] flex flex-col gap-2;
+}
+
+.alert {
+  @apply flex items-center justify-between text-white font-medium px-4 py-3 rounded-md shadow-lg;
+}
+
+.alert-info    { @apply bg-blue-500; }
+.alert-success { @apply bg-green-500; }
+.alert-error   { @apply bg-red-500; }
+.alert-warning { @apply bg-yellow-500; }
+
+.alert button {
+  @apply bg-transparent border-none text-white font-bold cursor-pointer;
+}
+
+/* === Flashcard Mejorada === */
+.flashcard-enhanced {
+  @apply w-full max-w-[600px] h-[400px] m-auto rounded-2xl shadow-lg cursor-pointer transition-transform duration-500;
+  transform-style: preserve-3d;
+  perspective: 1500px;
+  position: relative;
+}
+
+.flashcard-enhanced.flipped {
+  transform: rotateY(180deg);
+}
+
+.flashcard-enhanced.animating {
+  pointer-events: none;
+}
+
+.flashcard-enhanced.known {
+  box-shadow:
+    0 0 0 2px rgba(34, 197, 94, 0.5),
+    0 10px 25px -5px rgba(0, 0, 0, 0.1),
+    0 8px 10px -6px rgba(0, 0, 0, 0.05);
+}
+
+.flashcard-front-enhanced,
+.flashcard-back-enhanced {
+  @apply absolute top-0 left-0 w-full h-full rounded-2xl overflow-hidden flex items-center justify-center;
+  backface-visibility: hidden;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.flashcard-front-enhanced {
+  @apply bg-white z-10;
+}
+
+.flashcard-back-enhanced {
+  @apply bg-white;
+  transform: rotateY(180deg);
+}
+
+@media (max-width: 640px) {
+  .flashcard-enhanced {
+    height: 300px;
+  }
+}
+
+/* === LaTeX === */
+.katex {
+  font-family: 'Arial', 'Helvetica', sans-serif !important;
+  font-style: normal !important;
+  font-weight: normal !important;
+}
+
+.katex span {
+  font-family: inherit !important;
+  font-style: inherit !important;
+  font-weight: inherit !important;
+}
+
+.latex-output {
+  @apply block w-full break-words whitespace-normal;
+}
+
+.latex-output .katex {
+  @apply inline-block max-w-full break-words whitespace-normal leading-[1.4];
+  font-family: Arial, sans-serif !important;
+  font-style: normal !important;
+}
+
+.latex-output .katex-html {
+  @apply max-w-full whitespace-normal break-words;
+}
+
+/* === Misc === */
+.better-box {
+  @apply block max-w-full break-words whitespace-normal;
+}
+@keyframes fadeInDown {
+  0% {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fadeInDown {
+  animation: fadeInDown 0.3s ease forwards;
+}
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.animate-fadeInUp {
+  animation: fadeInUp 0.3s ease forwards;
+}
+
+.text-gradient-orange-metallic {
+  position: relative;
+  display: inline-block;
+  color: transparent;
+  background: linear-gradient(
+    90deg,
+    #ffb347 0%,
+    #ff7a00 20%,
+    #fffbe6 40%,
+    #ff9500 60%,
+    #ff7a00 80%,
+    #ffb347 100%
+  );
+  background-size: 200% auto;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: metallic-shine 2s linear infinite;
+}
+
+@keyframes metallic-shine {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: 0 0;
+  }
+}
+
+.text-gradient-orange-metallic::after {
+  content: attr(data-text);
+  position: absolute;
+  left: 0; top: 0; width: 100%; height: 100%;
+  z-index: -1;
+  color: #fff;
+  -webkit-text-stroke: 2px #FF7A00;
+  text-stroke: 2px #FF7A00;
+  opacity: 0.7;
+  pointer-events: none;
+}

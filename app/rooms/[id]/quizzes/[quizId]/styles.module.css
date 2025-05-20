@@ -1,0 +1,127 @@
+.pagination-navigation {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+.pagination-item {
+  width: 2.5rem;
+  height: 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.pagination-item-active {
+  background-color: #FF7A00;
+  color: white;
+}
+
+.pagination-item-answered {
+  background-color: #dcfce7;
+  color: #166534;
+  border: 1px solid #bbf7d0;
+}
+
+.pagination-item-default {
+  background-color: #f3f4f6;
+  color: #4b5563;
+}
+
+.quiz-progress-bar {
+  width: 100%;
+  height: 0.5rem;
+  background-color: #e5e7eb;
+  border-radius: 9999px;
+  overflow: hidden;
+}
+
+.quiz-progress-bar-fill {
+  height: 100%;
+  background-color: #FF7A00;
+  border-radius: 9999px;
+  transition: width 0.4s ease-out;
+}
+
+.question-container {
+  transition: all 0.3s ease;
+}
+
+.question-container-enter {
+  opacity: 0;
+  transform: translateX(20px);
+}
+
+.question-container-enter-active {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.question-container-exit {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.question-container-exit-active {
+  opacity: 0;
+  transform: translateX(-20px);
+}
+
+.summary-container {
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.confetti-button {
+  position: relative;
+  overflow: hidden;
+}
+
+.confetti-button:before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 300%;
+  height: 300%;
+  background: linear-gradient(
+    to right,
+    #ff7a00,
+    #ffb700,
+    #ff0095,
+    #b300ff,
+    #4c00ff
+  );
+  transform: translate(-50%, -50%);
+  z-index: -1;
+  animation: rotateBackground 3s linear infinite;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.confetti-button:hover:before {
+  opacity: 0.1;
+}
+
+@keyframes rotateBackground {
+  0% {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  100% {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
