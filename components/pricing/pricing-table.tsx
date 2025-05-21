@@ -13,6 +13,8 @@ export default function PricingTable() {
   const [billingPeriod, setBillingPeriod] = useState<"monthly" | "quarterly" | "yearly">("monthly")
   const currentPlan = getTierObject(user?.publicMetadata?.plan as string | undefined || "free")
 
+  const indexOfPlan = plans.findIndex((plan) => plan.id === currentPlan.id)
+
   return (
     <div className="px-4 sm:px-6 lg:px-8 py-12 min-h-screen">
       {/* Billing toggle */}
@@ -117,7 +119,7 @@ export default function PricingTable() {
                 </ul>
                 <div className="mt-auto">
                   {isSignedIn ? (
-                    <CheckoutButton planId={plan.id} isCurrentPlan={isCurrent} billingPeriod={billingPeriod} />
+                    <CheckoutButton planId={plan.id} isCurrentPlan={isCurrent} billingPeriod={billingPeriod} disabled={index < indexOfPlan} />
                   ) : (
                     <Link
                       href="/register"

@@ -16,10 +16,13 @@ export default function PricingPage() {
 
         <PricingTable />
         <div className="mt-12 flex flex-col items-center">
-          <h2 className="text-xl font-semibold mb-2">¿Tienes un código promocional?</h2>
-          <Link className="flex flex-col sm:flex-row gap-2 items-center w-full max-w-md" href="/promo">
-            
-              Reclamar
+          <h2 className="text-xl font-semibold mb-4">¿Tienes un código promocional?</h2>
+          <Link
+            href="/promo"
+            className="inline-flex items-center justify-center px-6 py-3 bg-gradient-to-r from-[#FF7A00] to-[#FFB347] text-white font-semibold rounded-xl shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-[#FF7A00] focus:ring-offset-2"
+          >
+            <span className="mr-2">🎁</span>
+            Reclamar
           </Link>
         </div>
 

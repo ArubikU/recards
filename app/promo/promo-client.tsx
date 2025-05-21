@@ -20,7 +20,7 @@ import { useCustomAlerts } from "@/hooks/use-custom-alerts";
 import { motion } from "framer-motion";
 import { BadgeCheck } from "lucide-react";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 interface PromoClientPageProps {
   currentPlan: string;
@@ -29,6 +29,7 @@ interface PromoClientPageProps {
 }
 
 export default function PromoClientPage({
+
   currentPlan,
   planId,
   expirationDate,
@@ -42,13 +43,16 @@ export default function PromoClientPage({
   const [success, setSuccess] = useState(false);
   const [claimedPlan, setClaimedPlan] = useState<string | null>(null);
   const [claimedDuration, setClaimedDuration] = useState<number | null>(null);
+const didLoadPromoCode = useRef(false);
 
-  // Prefill promo code from URL
-  useEffect(() => {
-    const params = new URLSearchParams(window.location.search);
-    const code = params.get("promoCode");
-    if (code) setPromoCode(code);
-  }, []);
+useEffect(() => {
+  if (didLoadPromoCode.current) return;
+  didLoadPromoCode.current = true;
+
+  const params = new URLSearchParams(window.location.search);
+  const code = params.get("promoCode");
+  if (code) setPromoCode(code);
+}, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -154,6 +158,21 @@ export default function PromoClientPage({
     </motion.div>
   );
 
+  const PromoInput = () => (
+            <div className="grid gap-2">
+              <label htmlFor="promoCode" className="text-sm font-medium">
+                Código Promocional
+              </label>
+              <Input
+                id="promoCode"
+                placeholder="ej. ORANGE2025"
+                value={promoCode}
+                onChange={(e) => setPromoCode(e.target.value)}
+                autoFocus
+              />
+            </div>
+          );
+
   const PromoForm = () => (
     <form onSubmit={handleSubmit}>
       <motion.div
@@ -169,18 +188,7 @@ export default function PromoClientPage({
             </CardDescription>
           </CardHeader>
           <CardContent className="grid gap-4">
-            <div className="grid gap-2">
-              <label htmlFor="promoCode" className="text-sm font-medium">
-                Código Promocional
-              </label>
-              <Input
-                id="promoCode"
-                placeholder="ej. ORANGE2025"
-                value={promoCode}
-                onChange={(e) => setPromoCode(e.target.value)}
-                autoFocus
-              />
-            </div>
+            <PromoInput />
             {error && (
               <Alert variant="destructive">
                 <AlertTitle>Error</AlertTitle>

@@ -8,12 +8,24 @@ interface CheckoutButtonProps {
   planId: string;
   isCurrentPlan: boolean;
   billingPeriod?: string;
+  disabled?: boolean;
 }
 
-export default function CheckoutButton({ planId, isCurrentPlan, billingPeriod }: CheckoutButtonProps) {
+export default function CheckoutButton({ planId, isCurrentPlan, billingPeriod, disabled }: CheckoutButtonProps) {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+
+  if (disabled) {
+    return (
+      <button
+        className="w-full py-2 px-4 bg-gray-300 text-gray-500 font-medium rounded-md cursor-not-allowed"
+        disabled
+      >
+        Ya estas en un plan superior
+      </button>
+    );
+  }
 
   // Free plan doesn't need checkout
   if (planId === "free") {
