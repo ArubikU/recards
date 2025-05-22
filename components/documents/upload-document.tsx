@@ -26,7 +26,7 @@ export default function DocumentUpload({ roomId, onUploadComplete, aiGenerations
   const userPlan = getTierObject((user?.publicMetadata?.plan as string) || "free")
 
   // Check if file upload is allowed based on limits
-  const canUploadMoreFiles = filesCount < filesPerRoomLimit
+  const canUploadMoreFiles = filesCount < filesPerRoomLimit && !userPlan.isUltimate
 
   // Function to upload a file to Vercel Blob Storage
   const uploadFile = async (file: File) => {
@@ -61,7 +61,7 @@ export default function DocumentUpload({ roomId, onUploadComplete, aiGenerations
       alert("Solo se permiten archivos PDF")
       return
     }
-    
+
 
     setIsUploading(true)
 
@@ -178,28 +178,28 @@ export default function DocumentUpload({ roomId, onUploadComplete, aiGenerations
       </div>
       <div className="card-body">
         <div className="flex border-b mb-4">
-        <select
-          value={uploadType}
-          onChange={(e) => setUploadType(e.target.value as importTypes)}
-          disabled={isUploading || !canUploadMoreFiles}
-          className="input"
-        >
-          {userPlan.importTypes.map((type) => (
-            <option key={type} value={type}>
-              {type === "pdf"
-          ? "PDF"
-          : type === "pdf-link"
-          ? "Enlace"
-          : type === "img"
-          ? "Imagen"
-          : type === "csv"
-          ? "CSV"
-          : type === "md"
-          ? "Markdown"
-          : "Otro"}
-            </option>
-          ))}
-        </select>
+          <select
+            value={uploadType}
+            onChange={(e) => setUploadType(e.target.value as importTypes)}
+            disabled={isUploading || !canUploadMoreFiles}
+            className="input"
+          >
+            {userPlan.importTypes.map((type) => (
+              <option key={type} value={type}>
+                {type === "pdf"
+                  ? "PDF"
+                  : type === "pdf-link"
+                    ? "Enlace"
+                    : type === "img"
+                      ? "Imagen"
+                      : type === "csv"
+                        ? "CSV"
+                        : type === "md"
+                          ? "Markdown"
+                          : "Otro"}
+              </option>
+            ))}
+          </select>
         </div>
 
 
@@ -224,8 +224,8 @@ export default function DocumentUpload({ roomId, onUploadComplete, aiGenerations
             />
             {!canUploadMoreFiles && (
               <p className="text-xs text-red-500 mt-2">
-          Has alcanzado el límite de archivos para esta sala.
-          {!userPlan.isUltimate && " Considera actualizar tu plan para obtener más espacio."}
+                Has alcanzado el límite de archivos para esta sala.
+                {!userPlan.isUltimate && " Considera actualizar tu plan para obtener más espacio."}
               </p>
             )}
           </div>
@@ -252,8 +252,8 @@ export default function DocumentUpload({ roomId, onUploadComplete, aiGenerations
             />
             {!canUploadMoreFiles && (
               <p className="text-xs text-red-500 mt-2">
-          Has alcanzado el límite de imágenes para esta sala.
-          {!userPlan.isUltimate && " Considera actualizar tu plan para obtener más espacio."}
+                Has alcanzado el límite de imágenes para esta sala.
+                {!userPlan.isUltimate && " Considera actualizar tu plan para obtener más espacio."}
               </p>
             )}
           </div>
@@ -280,8 +280,8 @@ export default function DocumentUpload({ roomId, onUploadComplete, aiGenerations
             />
             {!canUploadMoreFiles && (
               <p className="text-xs text-red-500 mt-2">
-          Has alcanzado el límite de archivos CSV para esta sala.
-          {!userPlan.isUltimate && " Considera actualizar tu plan para obtener más espacio."}
+                Has alcanzado el límite de archivos CSV para esta sala.
+                {!userPlan.isUltimate && " Considera actualizar tu plan para obtener más espacio."}
               </p>
             )}
           </div>
@@ -294,22 +294,22 @@ export default function DocumentUpload({ roomId, onUploadComplete, aiGenerations
             </p>
             <div className="flex">
               <input
-          type="url"
-          value={link}
-          onChange={(e) => setLink(e.target.value)}
-          placeholder="https://ejemplo.com/documento.pdf"
-          className="input flex-grow"
-          disabled={isUploading || !canUploadMoreFiles}
-          required
+                type="url"
+                value={link}
+                onChange={(e) => setLink(e.target.value)}
+                placeholder="https://ejemplo.com/documento.pdf"
+                className="input flex-grow"
+                disabled={isUploading || !canUploadMoreFiles}
+                required
               />
               <button type="submit" className="btn-primary ml-2" disabled={isUploading || !canUploadMoreFiles}>
-          {isUploading ? "Añadiendo..." : "Añadir"}
+                {isUploading ? "Añadiendo..." : "Añadir"}
               </button>
             </div>
             {!canUploadMoreFiles && (
               <p className="text-xs text-red-500 mt-2">
-          Has alcanzado el límite de enlaces para esta sala.
-          {!userPlan.isUltimate && " Considera actualizar tu plan para obtener más espacio."}
+                Has alcanzado el límite de enlaces para esta sala.
+                {!userPlan.isUltimate && " Considera actualizar tu plan para obtener más espacio."}
               </p>
             )}
           </form>
@@ -322,39 +322,33 @@ export default function DocumentUpload({ roomId, onUploadComplete, aiGenerations
             <p></p>
             {!userPlan.isUltimate && (<>Documentos: {filesCount} de {filesPerRoomLimit} permitidos</>
             )}
-            {!userPlan.isUltimate && (
-              <p className="text-xs text-red-500 mt-2">
-                Has alcanzado el límite de generaciones de IA para esta sala.
-              </p>
-            )}
-            {!canUploadMoreFiles && userPlan.isUltimate && (
-              <p className="text-xs text-red-500 mt-2">
-                Has alcanzado el límite de archivos para esta sala.
-              </p>
-            )}
-            {!userPlan.isUltimate && (
-              <span className="inline-flex items-center ml-2 group relative">
-              <svg
-                className="w-4 h-4 text-[#FF7A00] group-hover:text-[#1E293B] transition-colors cursor-pointer"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth={2}
-                viewBox="0 0 24 24"
-                aria-hidden="true"
-              >
-                <circle cx="12" cy="12" r="10" />
-                <line x1="12" y1="16" x2="12" y2="12" />
-                <circle cx="12" cy="8" r="1" />
-              </svg>
-              <span
-                className="absolute left-1/2 -translate-x-1/2 bottom-full mb-2 w-52 rounded bg-[#FF7A00] text-white text-xs px-3 py-2 opacity-0 group-hover:opacity-100 group-focus-within:opacity-100 pointer-events-auto transition-opacity z-20 shadow-lg"
-                style={{ whiteSpace: "normal" }}
-                tabIndex={-1}
-                role="tooltip"
-              >
-                Considera actualizar tu plan para obtener más espacio.
-              </span>
-              </span>
+            {!canUploadMoreFiles && (
+              <>
+                <p className="text-xs text-red-500 mt-2">
+                  Has alcanzado el límite de generaciones de IA para esta sala.
+                </p>
+                <span className="inline-flex items-center ml-2 group relative">
+                  <svg
+                    className="w-4 h-4 text-[#FF7A00] group-hover:text-[#1E293B] transition-colors cursor-pointer"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth={2}
+                    viewBox="0 0 24 24"
+                    aria-hidden="true"
+                  >
+                    <circle cx="12" cy="12" r="10" />
+                    <line x1="12" y1="16" x2="12" y2="12" />
+                    <circle cx="12" cy="8" r="1" />
+                  </svg>
+                  <span
+                    className="absolute left-1/2 -translate-x-1/2 bottom-full mb-2 w-52 rounded bg-[#FF7A00] text-white text-xs px-3 py-2 opacity-0 group-hover:opacity-100 group-focus-within:opacity-100 pointer-events-auto transition-opacity z-20 shadow-lg"
+                    style={{ whiteSpace: "normal" }}
+                    tabIndex={-1}
+                    role="tooltip"
+                  >
+                    Considera actualizar tu plan para obtener más espacio.
+                  </span>
+                </span></>
             )}
           </div>
         </div>
