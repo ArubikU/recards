@@ -8,7 +8,7 @@ export default function CreateRoom({ leftRoomsCount }: { leftRoomsCount: number 
   const isMobile = typeof window !== "undefined" && window.innerWidth < 640
   return (
     <button
-      className="bg-orange-500 hover:bg-orange-600 text-white font-semibold rounded-2xl px-4 py-2 sm:px-6 sm:py-3 text-sm sm:text-base transition disabled:opacity-50 disabled:cursor-not-allowed w-full sm:w-auto flex items-center justify-center"
+      className="bg-iris hover:bg-irisdark text-white font-semibold rounded-2xl px-4 py-2 sm:px-6 sm:py-3 text-sm sm:text-base transition disabled:opacity-50 disabled:cursor-not-allowed w-full sm:w-auto flex items-center justify-center"
       disabled={leftRoomsCount === 0}
       onClick={() => {
       if (leftRoomsCount > 0) {

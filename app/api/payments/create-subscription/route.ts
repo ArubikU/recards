@@ -26,7 +26,7 @@ export async function POST(request: NextRequest) {
       body: JSON.stringify({
         plan_id: planId, // PayPal subscription plan ID
         application_context: {
-          brand_name: "ReCards",
+          brand_name: "Nootiq",
           locale: "en-US",
           shipping_preference: "NO_SHIPPING",
           user_action: "SUBSCRIBE_NOW",

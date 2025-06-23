@@ -1,5 +1,7 @@
+import { CURRENCY } from "@/components/pricing/billingLabels";
+
 // PayPal API client for handling payments
-export async function createPayPalOrder(planId: string, period = "monthly") {
+export async function createPayPalOrder(planId: string, period = "monthly", currency: CURRENCY = "PEN") {
   try {
     const response = await fetch(`${process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000"}/api/payments/create-order`, {
       method: "POST",
@@ -9,9 +11,10 @@ export async function createPayPalOrder(planId: string, period = "monthly") {
       body: JSON.stringify({
         planId,
         period,
-
+        currency,
       }),
     });
+
 
     if (!response.ok) {
       throw new Error("Error creating PayPal order");

@@ -38,13 +38,13 @@ export default async function PaymentSuccessPage({
           </svg>
         </div>
         <h1 className="text-3xl font-bold mb-4">¡Pago Exitoso!</h1>
-        <p className="text-gray-600 mb-8">
+        <p className="text-ink mb-8">
           Tu pago ha sido procesado correctamente. Tu cuenta ha sido actualizada al plan {planName}.
         </p>
         <div className="space-y-4">
           <Link
             href="/dashboard"
-            className="block w-full py-2 px-4 bg-[#FF7A00] text-white font-medium rounded-md text-center hover:bg-[#E56E00]"
+            className="block w-full py-2 px-4 bg-iris text-white font-medium rounded-md text-center hover:bg-irisdark"
           >
             Ir al Dashboard
           </Link>

@@ -5,17 +5,17 @@ export default function ContactPage() {
     <div className="container mx-auto px-4 py-12">
       <div className="max-w-3xl mx-auto">
         <h1 className="text-4xl font-bold mb-8 text-center">¿Tienes preguntas?</h1>
-        <p className="text-xl text-gray-600 text-center mb-12">
+        <p className="text-xl text-ink text-center mb-12">
           Estamos aquí para ayudarte. Ya sea una duda técnica, una sugerencia o simplemente quieres decir hola, no dudes en escribirnos.
         </p>
 
         <form
           action="https://formspree.io/f/mqaqnwbe"
           method="POST"
-          className="bg-white p-8 rounded-lg shadow-lg space-y-6"
+          className="bg-ivory p-8 rounded-lg shadow-lg space-y-6"
         >
           <div>
-            <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
+            <label htmlFor="name" className="block text-sm font-medium text-ink mb-1">
               Nombre
             </label>
             <input
@@ -23,12 +23,12 @@ export default function ContactPage() {
               name="name"
               id="name"
               required
-              className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[#FF7A00]"
+              className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-iris"
             />
           </div>
 
           <div>
-            <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
+            <label htmlFor="email" className="block text-sm font-medium text-ink mb-1">
               Correo Electrónico
             </label>
             <input
@@ -36,12 +36,12 @@ export default function ContactPage() {
               name="email"
               id="email"
               required
-              className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[#FF7A00]"
+              className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-iris"
             />
           </div>
 
           <div>
-            <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-1">
+            <label htmlFor="message" className="block text-sm font-medium text-ink mb-1">
               Mensaje
             </label>
             <textarea
@@ -49,29 +49,29 @@ export default function ContactPage() {
               id="message"
               rows={5}
               required
-              className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[#FF7A00]"
+              className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-iris"
             ></textarea>
           </div>
 
           <button
             type="submit"
-            className="bg-[#FF7A00] hover:bg-orange-600 transition-colors text-white px-6 py-3 rounded-lg text-lg font-semibold w-full"
+            className="bg-iris hover:bg-irisdark transition-colors text-white px-6 py-3 rounded-lg text-lg font-semibold w-full"
           >
             Enviar Mensaje
           </button>
         </form>
         {/**
          * 
-        <div className="mt-12 text-center text-gray-600">
+        <div className="mt-12 text-center text-ink">
           También puedes escribirnos directamente a{" "}
-          <a href="mailto:contacto@recards.ai" className="text-[#FF7A00] font-medium hover:underline">
-            contacto@recards.ai
+          <a href="mailto:contacto@Nootiq.ai" className="text-iris font-medium hover:underline">
+            contacto@Nootiq.ai
           </a>
         </div>
 
          */}
         <div className="mt-8 text-center">
-          <Link href="/" className="text-[#FF7A00] font-semibold hover:underline">
+          <Link href="/" className="text-iris font-semibold hover:underline">
             Volver al inicio
           </Link>
         </div>

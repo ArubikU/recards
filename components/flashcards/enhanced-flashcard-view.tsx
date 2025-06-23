@@ -403,7 +403,7 @@ export default function EnhancedFlashcardView({ cards, plan }: EnhancedFlashcard
   if (!cards.length) {
     return (
       <div className="text-center py-12">
-        <p className="text-xl text-gray-600">No hay flashcards disponibles</p>
+        <p className="text-xl text-ink">No hay flashcards disponibles</p>
       </div>
     )
   }
@@ -412,13 +412,13 @@ export default function EnhancedFlashcardView({ cards, plan }: EnhancedFlashcard
     <div className="flex flex-col h-full">
       {/* Barra de progreso */}
       <div className="mb-4 space-y-2">
-        <div className="flex justify-between items-center text-sm text-gray-500 mb-1">
+        <div className="flex justify-between items-center text-sm text-ink mb-1">
           <span>Progreso: {Math.round(progress)}% ({cardsProgress.length}/{cards.length})</span>
           <span>Aprendidas: {Math.round(knownProgress)}% ({knownCards.length}/{cards.length})</span>
         </div>
         <div className="w-full h-2 bg-gray-100 rounded-full overflow-hidden">
           <div 
-            className="h-full bg-[#FF7A00] transition-all duration-300" 
+            className="h-full bg-iris transition-all duration-300" 
             style={{ width: `${progress}%` }}
           />
         </div>
@@ -434,7 +434,7 @@ export default function EnhancedFlashcardView({ cards, plan }: EnhancedFlashcard
       <div className="flex flex-wrap justify-between items-center gap-3 mb-4">
         {/* Buscador por keywords */}
         <div className="relative" ref={searchRef}>
-          <div className="flex flex-wrap gap-2 items-center border rounded-lg p-2 bg-white w-full md:w-96">
+          <div className="flex flex-wrap gap-2 items-center border rounded-lg p-2 bg-ivory w-full md:w-96">
             {selectedKeywords.map(keyword => (
               <div key={keyword} className="flex items-center bg-blue-100 text-blue-800 px-2 py-1 rounded text-sm">
                 <span>{keyword}</span>
@@ -463,7 +463,7 @@ export default function EnhancedFlashcardView({ cards, plan }: EnhancedFlashcard
           
           {/* Sugerencias de autocompletado */}
           {showSuggestions && suggestions.length > 0 && (
-            <div className="absolute z-10 mt-1 w-full md:w-96 max-h-60 overflow-auto bg-white rounded-md shadow-lg border">
+            <div className="absolute z-10 mt-1 w-full md:w-96 max-h-60 overflow-auto bg-ivory rounded-md shadow-lg border">
               {suggestions.map(keyword => (
                 <div
                   key={keyword}
@@ -522,7 +522,7 @@ export default function EnhancedFlashcardView({ cards, plan }: EnhancedFlashcard
       )}
       
       {/* Contador de tarjetas */}
-      <div className="text-center mb-4 text-sm text-gray-500">
+      <div className="text-center mb-4 text-sm text-ink">
         {filteredCards.length > 0 && `Tarjeta ${currentIndex + 1} de ${filteredCards.length}`}
       </div>
         {/* Tarjeta */}
@@ -554,12 +554,12 @@ export default function EnhancedFlashcardView({ cards, plan }: EnhancedFlashcard
                     {currentCard.keywords.split('-').map(keyword => keyword.trim()).filter(k => k).map((keyword, idx) =>
                       idx > 1 ? (
                         <div className="md:hidden" key={idx}>
-                          <span className="px-2 py-0.5 rounded-full bg-gray-100 text-gray-600 text-xs">
+                          <span className="px-2 py-0.5 rounded-full bg-gray-100 text-ink text-xs">
                             {keyword}
                           </span>
                         </div>
                       ) : (
-                        <span key={idx} className="px-2 py-0.5 rounded-full bg-gray-100 text-gray-600 text-xs">
+                        <span key={idx} className="px-2 py-0.5 rounded-full bg-gray-100 text-ink text-xs">
                           {keyword}
                         </span>
                       )
@@ -581,7 +581,7 @@ export default function EnhancedFlashcardView({ cards, plan }: EnhancedFlashcard
           </div>
         ) : (
           <div className="text-center p-8 bg-gray-50 rounded-lg">
-            <p className="text-lg text-gray-600 mb-2">No hay tarjetas que coincidan con tu búsqueda</p>
+            <p className="text-lg text-ink mb-2">No hay tarjetas que coincidan con tu búsqueda</p>
             <button 
               onClick={() => setSelectedKeywords([])}
               className="text-blue-600 hover:underline"
@@ -600,7 +600,7 @@ export default function EnhancedFlashcardView({ cards, plan }: EnhancedFlashcard
             className="p-3 rounded-full bg-gray-100 hover:bg-gray-200 transition-colors"
             aria-label="Anterior"
           >
-            <ChevronLeft className="w-6 h-6 text-gray-700" />
+            <ChevronLeft className="w-6 h-6 text-ink" />
           </button>
           
           <button 
@@ -608,7 +608,7 @@ export default function EnhancedFlashcardView({ cards, plan }: EnhancedFlashcard
             className={`px-4 py-2 rounded-lg transition-colors ${
               isCardKnown 
                 ? "bg-green-100 text-green-800 hover:bg-green-200" 
-                : "bg-gray-100 text-gray-800 hover:bg-gray-200"
+                : "bg-gray-100 text-ink hover:bg-gray-200"
             }`}
           >
             {isCardKnown ? "Aprendida ✓" : "Marcar como aprendida"}
@@ -619,7 +619,7 @@ export default function EnhancedFlashcardView({ cards, plan }: EnhancedFlashcard
             className="p-3 rounded-full bg-gray-100 hover:bg-gray-200 transition-colors"
             aria-label="Barajar"
           >
-            <Shuffle className="w-5 h-5 text-gray-700" />
+            <Shuffle className="w-5 h-5 text-ink" />
           </button>
           
           <button 
@@ -627,7 +627,7 @@ export default function EnhancedFlashcardView({ cards, plan }: EnhancedFlashcard
             className="p-3 rounded-full bg-gray-100 hover:bg-gray-200 transition-colors"
             aria-label="Siguiente"
           >
-            <ChevronRight className="w-6 h-6 text-gray-700" />
+            <ChevronRight className="w-6 h-6 text-ink" />
           </button>
         </div>
       )}

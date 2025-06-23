@@ -28,9 +28,9 @@ export default function UserProfile({ publicMetadata }: UserProfileProps) {
     useEffect(() => {
         if(isLoaded){
             setSettings({
-                emailNotifications: user?.unsafeMetadata.emailNotifications || false,
-                productUpdates: user?.unsafeMetadata.productUpdates || false,
-                language: user?.unsafeMetadata.language || "es"
+                emailNotifications: user?.unsafeMetadata.emailNotifications as any || false,
+                productUpdates: user?.unsafeMetadata.productUpdates as any || false,
+                language: user?.unsafeMetadata.language as any || "es"
             })
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -43,18 +43,18 @@ export default function UserProfile({ publicMetadata }: UserProfileProps) {
     const planFeatures = getPlanById(userPlan.id)?.features
 
     return (
-        <div className="bg-white rounded-lg shadow-md overflow-hidden">
+        <div className="bg-ivory rounded-lg shadow-md overflow-hidden">
             <div className="border-b">
                 <div className="flex">
                     <button
-                        className={`px-6 py-3 font-medium ${activeTab === "subscription" ? "border-b-2 border-[#FF7A00] text-[#FF7A00]" : "text-gray-500"
+                        className={`px-6 py-3 font-medium ${activeTab === "subscription" ? "border-b-2 border-iris text-iris" : "text-ink"
                             }`}
                         onClick={() => setActiveTab("subscription")}
                     >
                         Suscripción
                     </button>
                     <button
-                        className={`px-6 py-3 font-medium ${activeTab === "settings" ? "border-b-2 border-[#FF7A00] text-[#FF7A00]" : "text-gray-500"
+                        className={`px-6 py-3 font-medium ${activeTab === "settings" ? "border-b-2 border-iris text-iris" : "text-ink"
                             }`}
                         onClick={() => setActiveTab("settings")}
                     >
@@ -68,7 +68,7 @@ export default function UserProfile({ publicMetadata }: UserProfileProps) {
                     <div>
                         <div className="flex justify-between items-center mb-6">
                             <h3 className="text-xl font-semibold">Plan Actual</h3>
-                            <Link href="/pricing" className="text-[#FF7A00] hover:underline text-sm font-medium">
+                            <Link href="/pricing" className="text-iris hover:underline text-sm font-medium">
                                 Cambiar Plan
                             </Link>
                         </div>
@@ -77,8 +77,8 @@ export default function UserProfile({ publicMetadata }: UserProfileProps) {
                             <div className="flex justify-between items-center">
                                 <div>
                                     <h4 className="font-semibold text-lg">{userPlan.formattedName}</h4>
-                                    <p className="text-gray-500 text-sm">
-                                        {userPlan.isFree ? "Plan gratuito" : userPlan.isPremium ? "$9.99/mes" : "$19.99/mes"}
+                                    <p className="text-ink text-sm">
+                                        {userPlan.isFree ? "Plan gratuito" : userPlan.isPremium ? "S/ 49.99/mes" : "S/ 99.99/mes"}
                                     </p>
                                 </div>
                                 <span className="bg-green-100 text-green-800 text-xs font-medium px-2.5 py-0.5 rounded">Activo</span>
@@ -127,7 +127,7 @@ export default function UserProfile({ publicMetadata }: UserProfileProps) {
                                     <label className="flex items-center">
                                         <input
                                             type="checkbox"
-                                            className="rounded text-[#FF7A00] focus:ring-[#FF7A00] h-4 w-4 mr-2"
+                                            className="rounded text-iris focus:ring-iris h-4 w-4 mr-2"
                                             checked={!!settings.emailNotifications}
                                             onChange={e => setSettings(prev => ({ ...prev, emailNotifications: e.target.checked }))}
                                         />
@@ -136,7 +136,7 @@ export default function UserProfile({ publicMetadata }: UserProfileProps) {
                                     <label className="flex items-center">
                                         <input
                                             type="checkbox"
-                                            className="rounded text-[#FF7A00] focus:ring-[#FF7A00] h-4 w-4 mr-2"
+                                            className="rounded text-iris focus:ring-iris h-4 w-4 mr-2"
                                             checked={!!settings.productUpdates}
                                             onChange={e => setSettings(prev => ({ ...prev, productUpdates: e.target.checked }))}
                                         />
@@ -148,7 +148,7 @@ export default function UserProfile({ publicMetadata }: UserProfileProps) {
                             {/* Eliminar cuenta 
                             <div>
                                 <h4 className="font-medium mb-2">Eliminar Cuenta</h4>
-                                <p className="text-gray-500 text-sm mb-2">
+                                <p className="text-ink text-sm mb-2">
                                     Esta acción eliminará permanentemente tu cuenta y todos tus datos.
                                 </p>
                                 <button className="text-red-600 hover:text-red-800 text-sm font-medium">Eliminar mi cuenta</button>
@@ -158,7 +158,7 @@ export default function UserProfile({ publicMetadata }: UserProfileProps) {
                         {/* Guardar cambios */}
                         <div className="mt-8">
                             <button
-                                className="bg-[#FF7A00] text-white px-6 py-2 rounded font-medium hover:bg-[#e66a00] transition"
+                                className="bg-iris text-white px-6 py-2 rounded font-medium hover:bg-irisdark transition"
                                 onClick={() => {
                                     onUpdateSettings(settings,user)
                                 }}

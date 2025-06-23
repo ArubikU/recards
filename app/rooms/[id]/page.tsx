@@ -1,7 +1,7 @@
 import DocumentList from "@/components/documents/document-list"
 import DocumentUpload from "@/components/documents/upload-document"
 import ErrorMessage from "@/components/error-message"
-import { Card, CardContent, CardHeader } from "@/components/ui/card"
+import { Card } from "@/components/ui/card"
 import {
   canGenerateAi,
   getDocumentsByRoomId,
@@ -12,7 +12,7 @@ import {
   thisRoomIsLimited,
   userOwnRoom,
 } from "@/lib/db"
-import { getTierObject } from "@/lib/getLimits"
+import { getTierObject, importTypes } from "@/lib/getLimits"
 import { Quiz, Room } from "@/lib/types"
 import { auth, clerkClient } from "@clerk/nextjs/server"
 import Link from "next/link"
@@ -49,7 +49,11 @@ export default async function RoomPage({ params }: { params: { id: string } }) {
   if (limited) {
     return <ErrorMessage title="Room limitado" message="Este room ha alcanzado su límite de uso." backLink />
   }
-  const documents = await getDocumentsByRoomId(room.id)
+  const documents:{
+      id: string
+      type: importTypes
+      url: string
+    }[] = await getDocumentsByRoomId(room.id) as any
   const quizzes: Quiz[] = await getQuizzesByRoomId(room.id)
   const flashcards = await getFlashcardsByRoomId(room.id)
 
@@ -60,23 +64,23 @@ export default async function RoomPage({ params }: { params: { id: string } }) {
     <div className="max-w-7xl mx-auto px-6 py-8 animate-fadeIn">
       {/* Botón Volver a Rooms */}
       <div className="mb-6">
-        <Link href="/rooms" className="inline-block px-4 py-2 bg-orange-600 text-white rounded-lg shadow-md hover:bg-orange-700 transition-colors ease-in-out text-sm sm:text-base">
+        <Link href="/rooms" className="inline-block px-4 py-2 bg-irisdark text-white rounded-lg shadow-md hover:bg-iris transition-colors ease-in-out text-sm sm:text-base">
           ← Volver a Rooms
         </Link>
       </div>
 
       <div className="flex justify-between items-center mb-8">
-        <h1 className="text-3xl font-bold text-orange-600">{room.title}</h1>
+        <h1 className="text-3xl font-bold text-irisdark">{room.title}</h1>
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-10 gap-4">
 
         </div>
       </div>
       
-      {room.description && <p className="text-gray-600 mb-3">{room.description}</p>}
+      {room.description && <p className="text-ink mb-3">{room.description}</p>}
 
       <div className="flex flex-wrap gap-2">
         {room.tags?.map((tag, i) => (
-          <span key={i} className="bg-orange-100 text-orange-700 text-xs px-2 py-1 rounded-full animate-pulse">
+          <span key={i} className="bg-irisforeground text-iris text-xs px-2 py-1 rounded-full animate-pulse">
             {tag}
           </span>
         ))}
@@ -98,7 +102,7 @@ export default async function RoomPage({ params }: { params: { id: string } }) {
 
         <SectionCard title="Flashcards" actions={
           <div className="flex gap-3">
-            {flashcards.length > 0 && <Link href={`/rooms/${room.id}/flashcards`} className="text-orange-500 text-sm hover:underline">Ver todas</Link>}
+            {flashcards.length > 0 && <Link href={`/rooms/${room.id}/flashcards`} className="text-irisdark text-sm hover:underline">Ver todas</Link>}
             {(roomAiLimit > 0 && userAiMonthLimit > 0) && <GenerateFlashcardsButton roomId={room.id} />}
           </div>
         }>
@@ -107,7 +111,7 @@ export default async function RoomPage({ params }: { params: { id: string } }) {
 
         <SectionCard title="Quizzes" actions={
           <div className="flex gap-3">
-            {quizzes.length > 0 && <Link href={`/rooms/${room.id}/quizzes`} className="text-orange-500 text-sm hover:underline">Ver todos</Link>}
+            {quizzes.length > 0 && <Link href={`/rooms/${room.id}/quizzes`} className="text-irisdark text-sm hover:underline">Ver todos</Link>}
             {(roomAiLimit > 0 && userAiMonthLimit > 0) && <GenerateQuizButton roomId={room.id} />}
           </div>
         }>
@@ -120,14 +124,11 @@ export default async function RoomPage({ params }: { params: { id: string } }) {
 
 function SectionCard({ title, children, actions }: { title: string, children: React.ReactNode, actions?: React.ReactNode }) {
   return (
-    <Card className="rounded-2xl shadow-md border">
-      <CardHeader className="flex flex-row justify-between items-center p-4 border-b">
-        <h2 className="text-xl font-semibold text-orange-600">{title}</h2>
-        {actions}
-      </CardHeader>
-      <CardContent className="p-4">
-        {children}
-      </CardContent>
+    <Card
+      title={title}
+      header={actions}
+    >
+      {children}
     </Card>
   )
 }

@@ -21,8 +21,8 @@ export default function Navbar() {
       <Link
         href="/about"
         onClick={onClick}
-        className={`block text-gray-700 hover:text-[#FF7A00] px-3 py-2 rounded-md text-sm font-medium ${
-          pathname === "/about" ? "text-[#FF7A00]" : ""
+        className={`block text-ink hover:text-iris px-3 py-2 rounded-md text-sm font-medium ${
+          pathname === "/about" ? "text-iris" : ""
         }`}
       >
         Acerca de
@@ -30,8 +30,8 @@ export default function Navbar() {
           <Link
             href="/privacy"
             onClick={onClick}
-            className={`block text-gray-700 hover:text-[#FF7A00] px-3 py-2 rounded-md text-sm font-medium ${
-              pathname === "/privacy" ? "text-[#FF7A00]" : ""
+            className={`block text-ink hover:text-iris px-3 py-2 rounded-md text-sm font-medium ${
+              pathname === "/privacy" ? "text-iris" : ""
             }`}
           >
             Privacidad
@@ -39,8 +39,8 @@ export default function Navbar() {
       <Link
         href="/pricing"
         onClick={onClick}
-        className={`block text-gray-700 hover:text-[#FF7A00] px-3 py-2 rounded-md text-sm font-medium ${
-          pathname === "/pricing" ? "text-[#FF7A00]" : ""
+        className={`block text-ink hover:text-iris px-3 py-2 rounded-md text-sm font-medium ${
+          pathname === "/pricing" ? "text-iris" : ""
         }`}
       >
         Planes
@@ -50,8 +50,8 @@ export default function Navbar() {
           <Link
             href="/dashboard"
             onClick={onClick}
-            className={`block text-gray-700 hover:text-[#FF7A00] px-3 py-2 rounded-md text-sm font-medium ${
-              pathname === "/dashboard" ? "text-[#FF7A00]" : ""
+            className={`block text-ink hover:text-iris px-3 py-2 rounded-md text-sm font-medium ${
+              pathname === "/dashboard" ? "text-iris" : ""
             }`}
           >
             Dashboard
@@ -62,13 +62,13 @@ export default function Navbar() {
   )
 
   return (
-    <nav className="bg-white border-b z-50 relative">
+    <nav className="bg-ivory border-b z-50 relative">
       <div className="container mx-auto px-4">
         <div className="flex justify-between items-center h-16">
           <div className="flex items-center">
             <Link href="/" className="flex items-center">
               <Image src="/logo.png" alt="Logo" width={50} height={50} />
-              <span className="ml-2 text-xl font-bold text-gray-700">ReCards</span>
+              <span className="ml-2 text-xl font-bold text-ink">Nootiq</span>
             </Link>
           </div>
 
@@ -80,7 +80,7 @@ export default function Navbar() {
             ) : (
               <>
                 <SignInButton mode="redirect">
-                  <button className="text-gray-700 hover:text-[#FF7A00] px-3 py-2 rounded-md text-sm font-medium">
+                  <button className="text-ink hover:text-iris px-3 py-2 rounded-md text-sm font-medium">
                     Iniciar Sesión
                   </button>
                 </SignInButton>
@@ -95,7 +95,7 @@ export default function Navbar() {
           <div className="md:hidden">
             <button
               onClick={() => setMobileOpen(!mobileOpen)}
-              className="text-gray-700 hover:text-[#FF7A00] focus:outline-none"
+              className="text-ink hover:text-iris focus:outline-none"
             >
               {mobileOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
@@ -123,7 +123,7 @@ export default function Navbar() {
                       <SignInButton mode="redirect">
                         <button
                           onClick={closeMenu}
-                          className="w-full text-left text-gray-700 hover:text-[#FF7A00] px-3 py-2 rounded-md text-sm font-medium"
+                          className="w-full text-left text-ink hover:text-iris px-3 py-2 rounded-md text-sm font-medium"
                         >
                           Iniciar Sesión
                         </button>

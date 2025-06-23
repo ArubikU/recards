@@ -14,7 +14,7 @@ export default function EmailSection() {
         <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
                 <span>{user.primaryEmailAddress?.emailAddress}</span>
-                <Badge className="text-xs">Primary</Badge>
+                <Badge label="Primary" variant="defaultrounded"/>
             </div>
         </div>
     </>)

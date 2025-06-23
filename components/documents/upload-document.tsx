@@ -26,7 +26,8 @@ export default function DocumentUpload({ roomId, onUploadComplete, aiGenerations
   const userPlan = getTierObject((user?.publicMetadata?.plan as string) || "free")
 
   // Check if file upload is allowed based on limits
-  const canUploadMoreFiles = filesCount < filesPerRoomLimit && !userPlan.isUltimate
+  let canUploadMoreFiles = filesCount < filesPerRoomLimit || userPlan.isUltimate || userPlan.isUltra
+
 
   // Function to upload a file to Vercel Blob Storage
   const uploadFile = async (file: File) => {
@@ -205,20 +206,20 @@ export default function DocumentUpload({ roomId, onUploadComplete, aiGenerations
 
         {uploadType === "pdf" && (
           <div>
-            <p className="text-sm text-gray-600 mb-4">
-              Sube un archivo PDF para generar flashcards y quizzes automáticamente.
+            <p className="text-sm text-ink mb-4">
+              Sube un archivo PDF para generar material de estudio automáticamente.
             </p>
             <input
               type="file"
               ref={fileInputRef}
               accept=".pdf"
               onChange={handleFileUpload}
-              className="block w-full text-sm text-gray-500
+              className="block w-full text-sm text-ink
           file:mr-4 file:py-2 file:px-4
           file:rounded-md file:border-0
           file:text-sm file:font-medium
-          file:bg-[#FF7A00] file:text-white
-          hover:file:bg-[#E56E00]
+          file:bg-iris file:text-white
+          hover:file:bg-irisdark
               "
               disabled={isUploading || !canUploadMoreFiles}
             />
@@ -233,20 +234,20 @@ export default function DocumentUpload({ roomId, onUploadComplete, aiGenerations
 
         {uploadType === "img" && (
           <div>
-            <p className="text-sm text-gray-600 mb-4">
-              Sube una imagen (JPG, PNG) para generar flashcards y quizzes automáticamente.
+            <p className="text-sm text-ink mb-4">
+              Sube una imagen (JPG, PNG) para generar material de estudio automáticamente.
             </p>
             <input
               type="file"
               ref={fileInputRef}
               accept="image/png, image/jpeg"
               onChange={handleFileUpload}
-              className="block w-full text-sm text-gray-500
+              className="block w-full text-sm text-ink
           file:mr-4 file:py-2 file:px-4
           file:rounded-md file:border-0
           file:text-sm file:font-medium
-          file:bg-[#FF7A00] file:text-white
-          hover:file:bg-[#E56E00]
+          file:bg-iris file:text-white
+          hover:file:bg-irisdark
               "
               disabled={isUploading || !canUploadMoreFiles}
             />
@@ -261,20 +262,20 @@ export default function DocumentUpload({ roomId, onUploadComplete, aiGenerations
 
         {uploadType === "csv" && (
           <div>
-            <p className="text-sm text-gray-600 mb-4">
-              Sube un archivo CSV para importar datos y generar flashcards y quizzes automáticamente.
+            <p className="text-sm text-ink mb-4">
+              Sube un archivo CSV para importar datos y generar material de estudio automáticamente.
             </p>
             <input
               type="file"
               ref={fileInputRef}
               accept=".csv,text/csv"
               onChange={handleFileUpload}
-              className="block w-full text-sm text-gray-500
+              className="block w-full text-sm text-ink
           file:mr-4 file:py-2 file:px-4
           file:rounded-md file:border-0
           file:text-sm file:font-medium
-          file:bg-[#FF7A00] file:text-white
-          hover:file:bg-[#E56E00]
+          file:bg-iris file:text-white
+          hover:file:bg-irisdark
               "
               disabled={isUploading || !canUploadMoreFiles}
             />
@@ -289,8 +290,8 @@ export default function DocumentUpload({ roomId, onUploadComplete, aiGenerations
 
         {uploadType === "pdf-link" && (
           <form onSubmit={handleLinkSubmit}>
-            <p className="text-sm text-gray-600 mb-4">
-              Añade un enlace a un PDF, artículo o página web para generar flashcards y quizzes.
+            <p className="text-sm text-ink mb-4">
+              Añade un enlace a un PDF, artículo o página web para generar material de estudio.
             </p>
             <div className="flex">
               <input
@@ -317,7 +318,7 @@ export default function DocumentUpload({ roomId, onUploadComplete, aiGenerations
 
         {/* AI Generation Option */}
         <div className="mt-4">
-          <div className="text-xs text-gray-500 mt-1">
+          <div className="text-xs text-ink mt-1">
             {!userPlan.isUltimate && <>Generaciones de IA disponibles: {aiGenerationsLeft} de {aiGenerationsLimit}</>}
             <p></p>
             {!userPlan.isUltimate && (<>Documentos: {filesCount} de {filesPerRoomLimit} permitidos</>
@@ -329,7 +330,7 @@ export default function DocumentUpload({ roomId, onUploadComplete, aiGenerations
                 </p>
                 <span className="inline-flex items-center ml-2 group relative">
                   <svg
-                    className="w-4 h-4 text-[#FF7A00] group-hover:text-[#1E293B] transition-colors cursor-pointer"
+                    className="w-4 h-4 text-iris group-hover:text-[#1E293B] transition-colors cursor-pointer"
                     fill="none"
                     stroke="currentColor"
                     strokeWidth={2}
@@ -341,7 +342,7 @@ export default function DocumentUpload({ roomId, onUploadComplete, aiGenerations
                     <circle cx="12" cy="8" r="1" />
                   </svg>
                   <span
-                    className="absolute left-1/2 -translate-x-1/2 bottom-full mb-2 w-52 rounded bg-[#FF7A00] text-white text-xs px-3 py-2 opacity-0 group-hover:opacity-100 group-focus-within:opacity-100 pointer-events-auto transition-opacity z-20 shadow-lg"
+                    className="absolute left-1/2 -translate-x-1/2 bottom-full mb-2 w-52 rounded bg-iris text-white text-xs px-3 py-2 opacity-0 group-hover:opacity-100 group-focus-within:opacity-100 pointer-events-auto transition-opacity z-20 shadow-lg"
                     style={{ whiteSpace: "normal" }}
                     tabIndex={-1}
                     role="tooltip"
@@ -355,9 +356,9 @@ export default function DocumentUpload({ roomId, onUploadComplete, aiGenerations
 
         {isUploading && (
           <div className="mt-4 text-center">
-            <p className="text-sm text-gray-600">Subiendo documento...</p>
+            <p className="text-sm text-ink">Subiendo documento...</p>
             <div className="w-full h-2 bg-gray-200 rounded-full mt-2">
-              <div className="h-full bg-[#FF7A00] rounded-full animate-pulse"></div>
+              <div className="h-full bg-iris rounded-full animate-pulse"></div>
             </div>
           </div>
         )}

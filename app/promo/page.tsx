@@ -24,7 +24,7 @@ export default async function PromoPage() {
     <div className="container mx-auto py-10">
     <div className="text-center mb-10">
       <h1 className="text-4xl font-bold mb-4">Reclamar Código Promocional</h1>
-      <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+      <p className="text-xl text-ink max-w-2xl mx-auto">
         Ingresa tu código promocional para obtener acceso a beneficios exclusivos en tu plan de estudio.
       </p>
     </div>

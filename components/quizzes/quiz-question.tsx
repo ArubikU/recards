@@ -1,6 +1,6 @@
 "use client"
 
-import { renderToString } from "katex";
+import { MathJax } from "better-react-mathjax";
 import { useRef, useState } from "react";
 
 interface QuizQuestionProps {
@@ -25,13 +25,7 @@ const renderLatex = (value: string) => {
     return <span>{value}</span>
   }
 
-  const processed = containsMath(value) ? value : `\\text{${value}}`
-  return <div dangerouslySetInnerHTML={{ __html: renderToString(processed, {
-      displayMode: false,
-      output: 'html',
-      throwOnError: false,
-      strict: false
-    }) }} />
+  return <MathJax>{value}</MathJax>
 }
 
   const handleOptionSelect = (option: string) => {
@@ -91,8 +85,8 @@ const renderLatex = (value: string) => {
 
       {!isSubmitted && (
         <button 
-          className={`mt-6 bg-[#FF7A00] text-white px-4 py-2 rounded-md transition-all duration-300 ${
-            !selectedOption ? 'opacity-50 cursor-not-allowed' : 'hover:bg-[#E56A00]'
+          className={`mt-6 bg-iris text-white px-4 py-2 rounded-md transition-all duration-300 ${
+            !selectedOption ? 'opacity-50 cursor-not-allowed' : 'hover:bg-irisdark'
           }`} 
           onClick={handleSubmit} 
           disabled={!selectedOption}

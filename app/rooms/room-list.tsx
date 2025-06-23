@@ -1,4 +1,5 @@
 "use client";
+import { Option, Select } from "@/components/ui/select";
 import { Room, SortMethods, SortOrder } from "@/lib/types";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
@@ -12,11 +13,11 @@ interface RoomListProps {
     currentPlan: { isUltimate: boolean };
 }
 
-const sortOptions: { value: SortOrder; label: string }[] = [
-    { value: "name-asc", label: "Nombre (A-Z)" },
-    { value: "name-desc", label: "Nombre (Z-A)" },
-    { value: "date-desc", label: "Recientes" },
-    { value: "date-asc", label: "Antiguos" },
+const sortOptions: Option[] = [
+    { id: "name-asc", label: "Nombre (A-Z)" },
+    { id: "name-desc", label: "Nombre (Z-A)" },
+    { id: "date-desc", label: "Recientes" },
+    { id: "date-asc", label: "Antiguos" },
 ];
 
 export default function RoomList({
@@ -25,7 +26,7 @@ export default function RoomList({
     limits,
     currentPlan,
 }: RoomListProps) {
-    const [sortOrder, setSortOrder] = useState<SortOrder>("name-asc");
+    const [sortOrder, setSortOrder] = useState<Option>(sortOptions[0]);
     const [inputValue, setInputValue] = useState("");
     const [allTags, setAllTags] = useState<string[]>([]);
     const [selectedTags, setSelectedTags] = useState<string[]>([]);
@@ -56,7 +57,7 @@ export default function RoomList({
         }
 
         if (sortOrder) {
-            filtered = filtered.sort(SortMethods[sortOrder]);
+            filtered = filtered.sort(SortMethods[sortOrder.id as SortOrder]);
         }
 
         setRooms(filtered);
@@ -82,10 +83,10 @@ export default function RoomList({
     return (
         <>
             <div className="flex justify-between items-center mb-8">
-                <h1 className="text-3xl font-bold text-orange-600">Mis Rooms</h1>
+                <h1 className="text-3xl font-bold text-irisdark">Mis Rooms</h1>
                 <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-10 gap-4">
                     {!currentPlan.isUltimate && (
-                        <span className="text-gray-500 text-sm">
+                        <span className="text-ink text-sm">
                             Rooms restantes: {leftRoomsCount} / {limits.rooms}
                         </span>
                     )}
@@ -97,15 +98,15 @@ export default function RoomList({
             <div className="flex flex-col md:flex-row gap-4 mb-8">
                 {/* Input + Tags */}
                 <div className="relative w-full md:w-2/3">
-                    <div className="flex flex-wrap items-center gap-2 px-4 py-3 bg-white border border-orange-300 rounded-full shadow-md focus-within:ring-2 focus-within:ring-orange-500 transition">
+                    <div className="flex flex-wrap items-center gap-2 px-4 py-3 bg-ivory border border-irislight rounded-full shadow-md focus-within:ring-2 focus-within:ring-irisdark transition">
                         {selectedTags.map((tag) => (
                             <span
                                 key={tag}
-                                className="bg-orange-100 text-orange-600 text-sm px-2 py-1 rounded-full flex items-center gap-1"
+                                className="bg-irisforeground text-irisdark text-sm px-2 py-1 rounded-full flex items-center gap-1"
                             >
                                 #{tag}
                                 <button
-                                    className="text-orange-500 hover:text-orange-700"
+                                    className="text-irisdark hover:text-iris"
                                     onClick={() => removeTag(tag)}
                                 >
                                     ×
@@ -117,19 +118,19 @@ export default function RoomList({
                             value={inputValue}
                             onChange={(e) => setInputValue(e.target.value)}
                             placeholder="🔍 Buscar por nombre o #tag"
-                            className="flex-grow bg-transparent outline-none text-gray-800"
+                            className="flex-grow bg-transparent outline-none text-ink"
                         />
                     </div>
                     {inputValue && filteredSuggestions.length > 0 && (
                         <div
                             ref={suggestionsRef}
-                            className="absolute z-10 mt-1 w-full bg-white border border-orange-200 rounded-lg shadow-lg max-h-60 overflow-y-auto"
+                            className="absolute z-10 mt-1 w-full bg-ivory border border-irislight rounded-lg shadow-lg max-h-60 overflow-y-auto"
                         >
                             {filteredSuggestions.map((tag) => (
                                 <div
                                     key={tag}
                                     onClick={() => addTag(tag)}
-                                    className="px-4 py-2 hover:bg-orange-100 cursor-pointer text-gray-800"
+                                    className="px-4 py-2 hover:bg-orange-100 cursor-pointer text-ink"
                                 >
                                     #{tag}
                                 </div>
@@ -139,17 +140,11 @@ export default function RoomList({
                 </div>
 
                 {/* Sort selector */}
-                <select
+                <Select
                     value={sortOrder}
-                    onChange={(e) => setSortOrder(e.target.value as SortOrder)}
-                    className="w-full md:w-1/3 px-4 py-3 border border-orange-300 bg-white rounded-full shadow-md focus:outline-none focus:ring-2 focus:ring-orange-500"
-                >
-                    {sortOptions.map((opt) => (
-                        <option key={opt.value} value={opt.value}>
-                            {opt.label}
-                        </option>
-                    ))}
-                </select>
+                    options={sortOptions}
+                    onChange={setSortOrder}
+                />
             </div>
 
             {/* Resultados */}
@@ -161,11 +156,11 @@ export default function RoomList({
                 </div>
             ) : (
                 <div className="text-center py-16">
-                    <h2 className="text-2xl font-semibold text-orange-600 mb-2">No tienes rooms creados</h2>
-                    <p className="text-gray-600 mb-8">Crea tu primer room para comenzar a generar material de estudio</p>
+                    <h2 className="text-2xl font-semibold text-irisdark mb-2">No tienes rooms creados</h2>
+                    <p className="text-ink mb-8">Crea tu primer room para comenzar a generar material de estudio</p>
                     <Link
                         href="/rooms/new"
-                        className="bg-orange-500 hover:bg-orange-600 transition text-white px-6 py-2 rounded-xl shadow-md"
+                        className="bg-iris hover:bg-irisdark transition text-white px-6 py-2 rounded-xl shadow-md"
                     >
                         Crear mi primer Room
                     </Link>

@@ -78,7 +78,7 @@ export default function NewRoomPage() {
           <div className="card-body">
             <form onSubmit={handleSubmit}>
               <div className="mb-4">
-                <label htmlFor="title" className="block text-sm font-medium text-gray-700 mb-1">
+                <label htmlFor="title" className="block text-sm font-medium text-ink mb-1">
                   Título *
                 </label>
                 <input
@@ -94,7 +94,7 @@ export default function NewRoomPage() {
               </div>
 
               <div className="mb-4">
-                <label htmlFor="description" className="block text-sm font-medium text-gray-700 mb-1">
+                <label htmlFor="description" className="block text-sm font-medium text-ink mb-1">
                   Descripción
                 </label>
                 <textarea
@@ -108,7 +108,7 @@ export default function NewRoomPage() {
               </div>
 
               <div className="mb-6">
-                <label htmlFor="tags" className="block text-sm font-medium text-gray-700 mb-1">
+                <label htmlFor="tags" className="block text-sm font-medium text-ink mb-1">
                   Etiquetas (separadas por comas)
                 </label>
                 <input

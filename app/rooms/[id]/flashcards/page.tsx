@@ -49,7 +49,7 @@ export default async function RoomFlashcardsPage({
             <div className="container mx-auto px-4 py-8">
                 <h1 className="text-2xl font-bold mb-4">Room no encontrado</h1>
                 <p>El room que buscas no existe o no tienes acceso a él.</p>
-                <Link href="/rooms" className="text-[#FF7A00] hover:underline mt-4 inline-block">
+                <Link href="/rooms" className="text-iris hover:underline mt-4 inline-block">
                     Volver a mis Rooms
                 </Link>
             </div>
@@ -63,11 +63,11 @@ export default async function RoomFlashcardsPage({
     return (
         <div className="container mx-auto px-4 py-8">
             <div className="mb-8">
-                <Link href={`/rooms/${roomId}`} className="text-[#FF7A00] hover:underline mb-2 inline-block">
+                <Link href={`/rooms/${roomId}`} className="text-iris hover:underline mb-2 inline-block">
                     ← <span className="hidden md:inline">Volver al Room</span>
                 </Link>
                 <h1 className="text-3xl font-bold">Flashcards: {room.title}</h1>
-                {room.description && <p className="text-gray-600 mt-2">{room.description}</p>}
+                {room.description && <p className="text-ink mt-2">{room.description}</p>}
             </div>
             {flashcards.length > 0 ? (
                 <div className="mx-auto max-w-4xl">
@@ -87,10 +87,10 @@ export default async function RoomFlashcardsPage({
                 </div>
             ) : (
                 <div className="text-center py-12">
-                    <p className="text-xl text-gray-600 mb-4">No hay flashcards en este Room</p>
+                    <p className="text-xl text-ink mb-4">No hay flashcards en este Room</p>
                     <Link
                         href={`/rooms/${roomId}`}
-                        className="inline-block bg-[#FF7A00] text-white px-4 py-2 rounded hover:bg-[#E56E00]"
+                        className="inline-block bg-iris text-white px-4 py-2 rounded hover:bg-irisdark"
                     >
                         Volver y generar flashcards
                     </Link>

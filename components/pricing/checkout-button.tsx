@@ -3,15 +3,17 @@
 import { createPayPalOrder } from "@/lib/paypal";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { CURRENCY } from "./billingLabels";
 
 interface CheckoutButtonProps {
   planId: string;
   isCurrentPlan: boolean;
   billingPeriod?: string;
   disabled?: boolean;
+  currency?: CURRENCY;
 }
 
-export default function CheckoutButton({ planId, isCurrentPlan, billingPeriod, disabled }: CheckoutButtonProps) {
+export default function CheckoutButton({ planId, isCurrentPlan, billingPeriod, disabled, currency }: CheckoutButtonProps) {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -19,7 +21,7 @@ export default function CheckoutButton({ planId, isCurrentPlan, billingPeriod, d
   if (disabled) {
     return (
       <button
-        className="w-full py-2 px-4 bg-gray-300 text-gray-500 font-medium rounded-md cursor-not-allowed"
+        className="w-full py-2 px-4 bg-gray-300 text-ink font-medium rounded-md cursor-not-allowed"
         disabled
       >
         Ya estas en un plan superior
@@ -73,7 +75,7 @@ export default function CheckoutButton({ planId, isCurrentPlan, billingPeriod, d
   return (
     <div>
       <button
-        className="w-full py-2 px-4 bg-[#FF7A00] text-white font-medium rounded-md hover:bg-[#E56E00] disabled:opacity-50 disabled:cursor-not-allowed"
+        className="w-full py-2 px-4 bg-iris text-white font-medium rounded-md hover:bg-irisdark disabled:opacity-50 disabled:cursor-not-allowed"
         onClick={handleCheckout}
         disabled={isLoading || isCurrentPlan}
       >

@@ -8,7 +8,7 @@ export default function PricingPage() {
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
           <h1 className="text-4xl font-bold mb-4">Planes y Precios</h1>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+          <p className="text-xl text-ink max-w-3xl mx-auto">
             Elige el plan que mejor se adapte a tus necesidades de estudio. Todos los planes incluyen acceso a nuestra
             tecnología de IA para generar material de estudio.
           </p>
@@ -19,7 +19,7 @@ export default function PricingPage() {
           <h2 className="text-xl font-semibold mb-4">¿Tienes un código promocional?</h2>
           <Link
             href="/promo"
-            className="inline-flex items-center justify-center px-6 py-3 bg-gradient-to-r from-[#FF7A00] to-[#FFB347] text-white font-semibold rounded-xl shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-[#FF7A00] focus:ring-offset-2"
+            className="inline-flex items-center justify-center px-6 py-3 bg-gradient-to-r from-iris to-[#FFB347] text-white font-semibold rounded-xl shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-iris focus:ring-offset-2"
           >
             <span className="mr-2">🎁</span>
             Reclamar
@@ -28,10 +28,10 @@ export default function PricingPage() {
 
         <div className="mt-16 text-center">
           <h2 className="text-2xl font-bold mb-4">¿Tienes preguntas?</h2>
-          <p className="text-gray-600 mb-6">
+          <p className="text-ink mb-6">
             Contáctanos para obtener más información sobre nuestros planes y cómo podemos ayudarte.
           </p>
-          <Link href="/contact" className="text-[#FF7A00] hover:underline font-medium">
+          <Link href="/contact" className="text-iris hover:underline font-medium">
             Contactar al equipo de soporte
           </Link>
         </div>

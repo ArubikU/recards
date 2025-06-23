@@ -3,13 +3,19 @@
 @tailwind utilities;
 
 :root {
-  --primary: #ff7a00;
-  --primary-dark: #e56e00;
-  --primary-light: #ffa64d;
+  --primary: #a78bfa;         /* iris */
+  --primary-dark: #7c5eea;    /* más oscuro para hover/focus */
+  --primary-light: #d8caff;   /* para fondos suaves o highlights */
+  
+  --text-main: #1f2937;       /* ink */
+  --text-muted: #4b5563;      /* ink/70 */
+  --background: #ffffff;      /* ivory */
+  --background-alt: #f3f4f6;  /* mist */
+  --danger: #f87171;          /* coral */
 }
 
 body {
-  @apply bg-gray-50;
+  @apply bg-ivory;
   font-smooth: always;
 }
 
@@ -28,7 +34,7 @@ body {
 }
 
 .btn-secondary {
-  @apply btn text-gray-800 border border-gray-300 bg-white;
+  @apply btn text-ink border border-gray-300 bg-ivory;
 }
 
 .btn-secondary:hover {
@@ -37,7 +43,7 @@ body {
 
 /* === Tarjetas === */
 .card {
-  @apply bg-white rounded-lg shadow-md overflow-hidden;
+  @apply bg-ivory rounded-lg shadow-md overflow-hidden;
 }
 
 .card-header {
@@ -73,7 +79,7 @@ body {
 
 /* === Flashcard Básica === */
 .flashcard {
-  @apply bg-white rounded-lg shadow-md p-6 h-64 flex items-center justify-center text-center cursor-pointer transition-all duration-500;
+  @apply bg-ivory rounded-lg shadow-md p-6 h-64 flex items-center justify-center text-center cursor-pointer transition-all duration-500;
   transform-style: preserve-3d;
   position: relative;
   perspective: 1000px;
@@ -99,7 +105,7 @@ body {
 }
 
 .modal {
-  @apply bg-white p-6 rounded-lg shadow-xl z-50;
+  @apply bg-ivory p-6 rounded-lg shadow-xl z-50;
 }
 
 .modal button {
@@ -163,11 +169,11 @@ body {
 }
 
 .flashcard-front-enhanced {
-  @apply bg-white z-10;
+  @apply bg-ivory z-10;
 }
 
 .flashcard-back-enhanced {
-  @apply bg-white;
+  @apply bg-ivory;
   transform: rotateY(180deg);
 }
 
@@ -177,32 +183,6 @@ body {
   }
 }
 
-/* === LaTeX === */
-.katex {
-  font-family: 'Arial', 'Helvetica', sans-serif !important;
-  font-style: normal !important;
-  font-weight: normal !important;
-}
-
-.katex span {
-  font-family: inherit !important;
-  font-style: inherit !important;
-  font-weight: inherit !important;
-}
-
-.latex-output {
-  @apply block w-full break-words whitespace-normal;
-}
-
-.latex-output .katex {
-  @apply inline-block max-w-full break-words whitespace-normal leading-[1.4];
-  font-family: Arial, sans-serif !important;
-  font-style: normal !important;
-}
-
-.latex-output .katex-html {
-  @apply max-w-full whitespace-normal break-words;
-}
 
 /* === Misc === */
 .better-box {
@@ -236,26 +216,6 @@ body {
   animation: fadeInUp 0.3s ease forwards;
 }
 
-.text-gradient-orange-metallic {
-  position: relative;
-  display: inline-block;
-  color: transparent;
-  background: linear-gradient(
-    90deg,
-    #ffb347 0%,
-    #ff7a00 20%,
-    #fffbe6 40%,
-    #ff9500 60%,
-    #ff7a00 80%,
-    #ffb347 100%
-  );
-  background-size: 200% auto;
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  animation: metallic-shine 2s linear infinite;
-}
-
 @keyframes metallic-shine {
   0% {
     background-position: 200% 0;
@@ -264,15 +224,50 @@ body {
     background-position: 0 0;
   }
 }
-
-.text-gradient-orange-metallic::after {
+.text-gradient-nootiq::after {
   content: attr(data-text);
   position: absolute;
   left: 0; top: 0; width: 100%; height: 100%;
   z-index: -1;
   color: #fff;
-  -webkit-text-stroke: 2px #FF7A00;
-  text-stroke: 2px #FF7A00;
+  -webkit-text-stroke: 2px #A78BFA; /* Lavanda */
+  text-stroke: 2px #A78BFA;
   opacity: 0.7;
   pointer-events: none;
+}
+
+.text-gradient-nootiq {
+  position: relative;
+  display: inline-block;
+  color: transparent;
+  background: linear-gradient(
+    90deg,
+    #A78BFA 0%,     /* Lavanda */
+    #F87171 20%,    /* Coral suave */
+    #FFFBE6 40%,    /* Amarillo pálido */
+    #1F2937 60%,    /* Azul tinta */
+    #A78BFA 80%,    /* Lavanda */
+    #F3F4F6 100%    /* Marfil suave */
+  );
+  background-size: 200% auto;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: metallic-shine 2s linear infinite;
+}
+
+.bg-ivory-lavanda-stripes {
+  background-image: repeating-linear-gradient(
+    45deg,
+    #7C3AED 0,
+    #7C3AED 10px,
+    #A78BFA 10px,
+    #A78BFA 20px
+  );
+  text-align: center;
+  padding: 0.5rem 0;
+  font-size: 0.875rem; /* text-sm */
+  font-weight: 600; /* font-semibold */
+  text-transform: uppercase;
+  letter-spacing: 0.05em; /* tracking-wide */
 }

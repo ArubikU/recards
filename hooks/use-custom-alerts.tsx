@@ -59,7 +59,7 @@ export const CustomAlertProvider = ({ children }: { children: ReactNode }) => {
     return new Promise<boolean>((resolve) => {
       setModal(
         <div className="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-[9999]">
-          <div className="bg-white rounded-xl p-6 max-w-sm w-full shadow-lg text-center">
+          <div className="bg-ivory rounded-xl p-6 max-w-sm w-full shadow-lg text-center">
             <p className="mb-6 text-lg">{message}</p>
             <div className="flex justify-center gap-4">
               <button
@@ -91,7 +91,7 @@ export const CustomAlertProvider = ({ children }: { children: ReactNode }) => {
     return new Promise<string>((resolve) => {
       setModal(
         <div className="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-[9999]">
-          <div className="bg-white rounded-xl p-6 max-w-sm w-full shadow-lg text-center">
+          <div className="bg-ivory rounded-xl p-6 max-w-sm w-full shadow-lg text-center">
             <p className="mb-6 text-lg">{message}</p>
             <div className="flex flex-wrap justify-center gap-4">
               {options.map((opt) => (
@@ -101,7 +101,7 @@ export const CustomAlertProvider = ({ children }: { children: ReactNode }) => {
                     setModal(null);
                     resolve(opt);
                   }}
-                  className="btn-primary px-5 py-2 rounded-md bg-orange-600 text-white hover:bg-orange-700 transition"
+                  className="btn-primary px-5 py-2 rounded-md bg-irisdark text-white hover:bg-iris transition"
                 >
                   {opt}
                 </button>
@@ -131,7 +131,7 @@ export const CustomAlertProvider = ({ children }: { children: ReactNode }) => {
               className="p-1 rounded hover:bg-gray-200 transition"
               aria-label="Cerrar alerta"
             >
-              <X className="w-4 h-4 text-gray-600" />
+              <X className="w-4 h-4 text-ink" />
             </button>
           </div>
         ))}

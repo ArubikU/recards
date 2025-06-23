@@ -1,14 +1,44 @@
-
-export const plans = [
-  {
+export type CURRENCY = "PEN" | "USD" | "EUR";
+export type CURRENCY_SYMBOL = "S/" | "$" | "€";
+export const CURRENCY_SYMBOLS: Record<CURRENCY, CURRENCY_SYMBOL> = {
+  PEN: "S/",
+  USD: "$",
+  EUR: "€",
+};
+export const CURRENCIES: CURRENCY[] = ["PEN", "USD", "EUR"];
+export type WAYS_KEYS = "monthly" | "quarterly" | "yearly";
+export type WAYS = { [key in WAYS_KEYS]: number  };
+export type Plan = {
+  id: string;
+  name: string;
+  description: string;
+  recommended: boolean;
+  prices: Record<CURRENCY, WAYS>;
+  features: string[];
+  unavailable: string[];
+};
+export const plans: Plan[] = [
+   {
     id: "free",
     name: "Free",
     description: "Para uso personal básico",
     recommended: false,
     prices: {
-      monthly: 0,
-      quarterly: 0,
-      yearly: 0,
+      PEN: {
+        monthly: 0,
+        quarterly: 0,
+        yearly: 0,
+      },
+      USD: {
+        monthly: 0,
+        quarterly: 0,
+        yearly: 0,
+      },
+      EUR: {
+        monthly: 0,
+        quarterly: 0,
+        yearly: 0,
+      },
     },
     features: [
       "Hasta 5 Rooms",
@@ -25,9 +55,21 @@ export const plans = [
     description: "Para estudiantes y profesionales",
     recommended: true,
     prices: {
-      monthly: 9.99,
-      quarterly: 8.99,
-      yearly: 7.99,
+      PEN: {
+        monthly: 40.0,
+        quarterly: 35.0,
+        yearly: 30.0,
+      },
+      USD: {
+        monthly: Number.parseFloat((40.0 / 3.8).toFixed(2)),
+        quarterly: Number.parseFloat((35.0 / 3.8).toFixed(2)),
+        yearly: Number.parseFloat((30.0 / 3.8).toFixed(2)),
+      },
+      EUR: {
+        monthly: Number.parseFloat((40.0 / 4).toFixed(2)),
+        quarterly: Number.parseFloat((35.0 / 4).toFixed(2)),
+        yearly: Number.parseFloat((30.0 / 4).toFixed(2)),
+      },
     },
     features: [
       "Hasta 15 Rooms",
@@ -35,7 +77,7 @@ export const plans = [
       "20 generaciones de AI mensuales",
       "3 Archivos por room",
       "Exportación avanzada (CSV)",
-      "Documentos especiales (CSV)"
+      "Documentos especiales (CSV)",
     ],
     unavailable: ["Soporte prioritario"],
   },
@@ -45,9 +87,21 @@ export const plans = [
     description: "Para uso intensivo",
     recommended: false,
     prices: {
-      monthly: 19.99,
-      quarterly: 17.99,
-      yearly: 15.99,
+      PEN: {
+        monthly: 80.0,
+        quarterly: 75.0,
+        yearly: 70.0,
+      },
+      USD: {
+        monthly: Number.parseFloat((80.0 / 3.8).toFixed(2)),
+        quarterly: Number.parseFloat((75.0 / 3.8).toFixed(2)),
+        yearly: Number.parseFloat((70.0 / 3.8).toFixed(2)),
+      },
+      EUR: {
+        monthly: Number.parseFloat((80.0 / 4).toFixed(2)),
+        quarterly: Number.parseFloat((75.0 / 4).toFixed(2)),
+        yearly: Number.parseFloat((70.0 / 4).toFixed(2)),
+      },
     },
     features: [
       "Rooms ilimitados",
@@ -55,9 +109,10 @@ export const plans = [
       "Exportación ultimate (CSV, Anki)",
       "Soporte prioritario",
       "Documentos especiales (CSV, IMG)",
+      "Conversa con el documento",
     ],
     unavailable: [],
-  }
+  },
 ];
 
 export const getPlanById = (id: string) => {

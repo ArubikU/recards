@@ -34,7 +34,7 @@ export default async function QuizPage({ params }: { params: { id: string; quizI
       <div className="container mx-auto px-4 py-8">
         <h1 className="text-2xl font-bold mb-4">Room no encontrado</h1>
         <p>El room que buscas no existe o no tienes acceso a él.</p>
-        <Link href="/rooms" className="text-[#FF7A00] hover:underline mt-4 inline-block">
+        <Link href="/rooms" className="text-iris hover:underline mt-4 inline-block">
           Volver a mis Rooms
         </Link>
       </div>
@@ -47,7 +47,7 @@ export default async function QuizPage({ params }: { params: { id: string; quizI
       <div className="container mx-auto px-4 py-8">
         <h1 className="text-2xl font-bold mb-4">Acceso denegado</h1>
         <p>No tienes permiso para ver este room.</p>
-        <Link href="/rooms" className="text-[#FF7A00] hover:underline mt-4 inline-block">
+        <Link href="/rooms" className="text-iris hover:underline mt-4 inline-block">
           Volver a mis Rooms
         </Link>
       </div>
@@ -63,7 +63,7 @@ export default async function QuizPage({ params }: { params: { id: string; quizI
       <div className="container mx-auto px-4 py-8">
         <h1 className="text-2xl font-bold mb-4">Quiz no encontrado</h1>
         <p>El quiz que buscas no existe o ha sido eliminado.</p>
-        <Link href={`/rooms/${room.id}/quizzes`} className="text-[#FF7A00] hover:underline mt-4 inline-block">
+        <Link href={`/rooms/${room.id}/quizzes`} className="text-iris hover:underline mt-4 inline-block">
           Volver a los Quizzes
         </Link>
       </div>
@@ -73,18 +73,18 @@ export default async function QuizPage({ params }: { params: { id: string; quizI
   return (
     <div className="container mx-auto px-4 py-8">
       <div className="mb-8">
-        <Link href={`/rooms/${room.id}/quizzes`} className="text-[#FF7A00] hover:underline mb-2 inline-block">
+        <Link href={`/rooms/${room.id}/quizzes`} className="text-iris hover:underline mb-2 inline-block">
           ← <span className="hidden md:inline">Volver a los Quizzes</span>
         </Link>
         <h1 className="text-3xl font-bold">{quiz.title}</h1>
-        <p className="text-gray-600 mt-2">{quiz.description}</p>
+        <p className="text-ink mt-2">{quiz.description}</p>
 
 
 
         {quiz.tags && quiz.tags.length > 0 && (
           <div className="flex flex-wrap gap-2 mt-3">
             {quiz.tags.map((tag, i) => (
-              <span key={i} className="bg-gray-100 text-gray-600 text-xs px-2 py-1 rounded">
+              <span key={i} className="bg-gray-100 text-ink text-xs px-2 py-1 rounded">
                 {tag}
               </span>
             ))}
@@ -93,12 +93,12 @@ export default async function QuizPage({ params }: { params: { id: string; quizI
 
         {quiz.difficulty && (
           <div className="mt-4 flex items-center">
-            <span className="text-sm text-gray-700 mr-2">Dificultad:</span>
+            <span className="text-sm text-ink mr-2">Dificultad:</span>
             <div className="flex">
               {[...Array(5)].map((_, i) => (
                 <span
                   key={i}
-                  className={`w-3 h-3 rounded-full mx-0.5 ${i < quiz.difficulty ? "bg-[#FF7A00]" : "bg-gray-200"
+                  className={`w-3 h-3 rounded-full mx-0.5 ${i < quiz.difficulty ? "bg-iris" : "bg-gray-200"
                     }`}
                 />
               ))}
@@ -107,7 +107,7 @@ export default async function QuizPage({ params }: { params: { id: string; quizI
         )}
 
         {quiz.source && (
-          <div className="mt-2 text-sm text-gray-500">
+          <div className="mt-2 text-sm text-ink">
             <span className="font-medium">Fuente:</span> {quiz.source}
           </div>
         )}
@@ -118,7 +118,7 @@ export default async function QuizPage({ params }: { params: { id: string; quizI
       </div>
 
       <div className="max-w-3xl mx-auto">
-        <div className="bg-white rounded-lg shadow-sm p-6 mb-8">
+        <div className="bg-ivory rounded-lg shadow-sm p-6 mb-8">
           <h2 className="text-xl font-semibold mb-6">Preguntas ({quiz.questions?.length || 0})</h2>
           {quiz.questions && quiz.questions.length > 0 ? (
             <QuizPageClient
@@ -129,7 +129,7 @@ export default async function QuizPage({ params }: { params: { id: string; quizI
             />
           ) : (
             <div className="text-center py-8">
-              <p className="text-gray-500">Este quiz no tiene preguntas.</p>
+              <p className="text-ink">Este quiz no tiene preguntas.</p>
             </div>
           )}
         </div>

@@ -14,10 +14,10 @@ export default function ErrorMessage({
 }) {
   return (
     <div className="max-w-2xl mx-auto px-6 py-12 text-center">
-      <h1 className="text-3xl font-bold text-orange-600 mb-2">{title}</h1>
-      <p className="text-gray-600 mb-4">{message}</p>
+      <h1 className="text-3xl font-bold text-irisdark mb-2">{title}</h1>
+      <p className="text-ink mb-4">{message}</p>
       {backLink && (
-        <Link href={backLinkHref} className="text-orange-500 hover:underline">
+        <Link href={backLinkHref} className="text-irisdark hover:underline">
           {backLinkText}
         </Link>
       )}

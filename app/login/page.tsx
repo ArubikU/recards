@@ -8,7 +8,7 @@ import { useEffect, useState } from "react";
 
 const logoComponent = (<></>)
 const OlogoComponent = (<motion.div
-  className="h-16 w-16 bg-orange-600 rounded-full mx-auto mb-6 flex items-center justify-center shadow-md shadow-orange-500/40"
+  className="h-16 w-16 bg-irisdark rounded-full mx-auto mb-6 flex items-center justify-center shadow-md shadow-irisdark/40"
   initial={{ scale: 0.8, opacity: 0 }}
   animate={{ scale: 1, opacity: 1 }}
   transition={{ duration: 0.5 }}
@@ -16,7 +16,6 @@ const OlogoComponent = (<motion.div
   <span className="text-2xl font-extrabold text-white">R</span>
 </motion.div>)
 export default function SignInPage() {
-  const [step, setStep] = useState("identifier");
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
@@ -30,12 +29,12 @@ export default function SignInPage() {
       <SignIn.Root>
         <SignIn.Step
           name="start"
-          className="w-full  max-w-md space-y-8 rounded-3xl bg-white p-10 shadow-xl transition-all duration-300 hover:shadow-xl hover:shadow-orange-200/50"
+          className="w-full  max-w-md space-y-8 rounded-3xl bg-ivory p-10 shadow-xl transition-all duration-300 hover:shadow-xl hover:shadow-irislight/50"
         >
           <header className="text-center">
             {logoComponent}
             <motion.h1
-              className="text-2xl font-semibold text-gray-800"
+              className="text-2xl font-semibold text-ink"
               initial={{ y: -50, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ duration: 0.6, delay: 0.2 }}
@@ -43,7 +42,7 @@ export default function SignInPage() {
               Sign in to ReApp
             </motion.h1>
             <motion.p
-              className="mt-2 text-gray-500"
+              className="mt-2 text-rage"
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.4 }}
@@ -91,7 +90,7 @@ export default function SignInPage() {
           </div>
           <div className="relative mt-6 flex items-center">
             <div className="flex-grow border-t border-gray-300" />
-            <span className="mx-4 text-sm text-gray-500">or</span>
+            <span className="mx-4 text-sm text-rage">or</span>
             <div className="flex-grow border-t border-gray-300" />
           </div>
 
@@ -104,26 +103,26 @@ export default function SignInPage() {
               transition={{ duration: 0.4 }}
             >
               <Clerk.Field name="identifier" className="space-y-2">
-                <Clerk.Label className="text-sm font-medium text-gray-700">Email address or username</Clerk.Label>
+                <Clerk.Label className="text-sm font-medium text-ink">Email address or username</Clerk.Label>
                 <Clerk.Input
                   type="text"
                   required
-                  className="w-full rounded-xl bg-gray-50 px-4 py-3 text-sm outline-none ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-orange-500"
+                  className="w-full rounded-xl bg-gray-50 px-4 py-3 text-sm outline-none ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-irisdark"
                 />
                 <Clerk.FieldError className="block text-sm text-red-500" />
               </Clerk.Field>
               <Clerk.Field name="password" className="space-y-2">
-                <Clerk.Label className="text-sm font-medium text-gray-700">Password</Clerk.Label>
+                <Clerk.Label className="text-sm font-medium text-ink">Password</Clerk.Label>
                 <Clerk.Input
                   type="password"
                   required
-                  className="w-full rounded-full bg-gray-50 px-4 py-3 text-sm outline-none ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-orange-500"
+                  className="w-full rounded-full bg-gray-50 px-4 py-3 text-sm outline-none ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-irisdark"
                 />
                 <Clerk.FieldError className="block text-sm text-red-500" />
               </Clerk.Field>
               <SignIn.Action
                 submit
-                className="w-full rounded-xl bg-orange-600 px-4 py-3 text-sm font-semibold text-white shadow-md transition-all duration-300 hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-orange-400 mt-4 flex items-center justify-center gap-2"
+                className="w-full rounded-xl bg-irisdark px-4 py-3 text-sm font-semibold text-white shadow-md transition-all duration-300 hover:bg-iris focus:outline-none focus:ring-2 focus:ring-irisdark mt-4 flex items-center justify-center gap-2"
               >
                 Continue
                 <svg
@@ -141,11 +140,11 @@ export default function SignInPage() {
           </AnimatePresence>
           <footer className="">
 
-            <p className="text-center text-sm text-gray-500">
+            <p className="text-center text-sm text-rage">
               Don’t have an account?{' '}
               <Clerk.Link
                 navigate="sign-up"
-                className="font-medium text-orange-600 underline-offset-4 hover:underline"
+                className="font-medium text-irisdark underline-offset-4 hover:underline"
               >
                 Create one
               </Clerk.Link>

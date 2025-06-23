@@ -1,14 +1,14 @@
-# ReCards 📚✨
+# Nootiq 📚✨
 
 **Transforma tus documentos en materiales de estudio inteligentes.**
 
-ReCards es una plataforma potenciada con inteligencia artificial que convierte automáticamente PDFs y enlaces en flashcards interactivas y quizzes personalizados, ayudándote a estudiar de forma más efectiva y divertida.
+Nootiq es una plataforma potenciada con inteligencia artificial que convierte automáticamente PDFs y enlaces en flashcards interactivas y quizzes personalizados, ayudándote a estudiar de forma más efectiva y divertida.
 
 ---
 
 ## 🌐 Demo
 
-👉 [Ir a la demo](https://recards.vercel.app)  
+👉 [Ir a la demo](https://Nootiq.vercel.app)  
 *(reemplaza con el enlace real si es diferente)*
 
 ---
@@ -30,7 +30,7 @@ ReCards es una plataforma potenciada con inteligencia artificial que convierte a
 
 ## 🛠️ ¿Cómo se ha utilizado Clerk?
 
-ReCards utiliza [Clerk](https://clerk.dev) como proveedor de autenticación y gestión de usuarios. Clerk se encarga de:
+Nootiq utiliza [Clerk](https://clerk.dev) como proveedor de autenticación y gestión de usuarios. Clerk se encarga de:
 
 - 📌 **Autenticación y Registro** de usuarios.
 - 🧑‍💼 **Gestión de metadata de usuario**, como el rango, preferencias y configuración personal.
@@ -78,7 +78,7 @@ Se almacena metadata personalizada como:
 
 ## ✨ Contribuciones
 
-¿Tienes ideas para mejorar ReCards o quieres colaborar? ¡Eres bienvenida/o!
+¿Tienes ideas para mejorar Nootiq o quieres colaborar? ¡Eres bienvenida/o!
 Puedes abrir un issue o un pull request con mejoras, feedback o nuevas features.
 
 ---
@@ -86,4 +86,4 @@ Puedes abrir un issue o un pull request con mejoras, feedback o nuevas features.
 ## 📩 Contacto
 
 Desarrollado con 💻 y ☕ por [Arubik](https://github.com/arubiku)
-Puedes escribirme si deseas colaborar o implementar ReCards en tu organización.
+Puedes escribirme si deseas colaborar o implementar Nootiq en tu organización.

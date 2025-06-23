@@ -38,7 +38,7 @@ function ProfileCard() {
 
     if (updatingProfile) {
         return (
-            <div className="border rounded-xl p-6 shadow-sm bg-white">
+            <div className="border rounded-xl p-6 shadow-sm bg-ivory">
                 <h3 className="text-sm font-medium mb-4 text-gray-900">Update profile</h3>
                 <div className="flex flex-col sm:flex-row items-center gap-4 mb-4">
                     <Image
@@ -59,13 +59,13 @@ function ProfileCard() {
                         <label htmlFor="profile-image-upload" className="w-full">
                             <Button
                                 type="button"
-                                className="bg-white rounded-xl border-4 border-gray-300/80 hover:bg-gray-100 w-full sm:w-auto"
+                                className="bg-ivory rounded-xl border-4 border-gray-300/80 hover:bg-gray-100 w-full sm:w-auto"
                                 asChild
                             >
                                 <span>Upload</span>
                             </Button>
                         </label>
-                        <p className="text-sm text-gray-700">Recommended size 1:1, up to 10MB.</p>
+                        <p className="text-sm text-ink">Recommended size 1:1, up to 10MB.</p>
                     </div>
                 </div>
                 <div className="flex flex-col sm:flex-row gap-4 mb-6">
@@ -93,7 +93,7 @@ function ProfileCard() {
                         Cancel
                     </Button>
                     <Button
-                        className="bg-gray-800 rounded-xl text-white hover:bg-gray-600"
+                        className="bg-gray-800 rounded-xl text-white hover:bg-ink"
                         disabled={
                             firstName === (user.firstName || "") &&
                             lastName === (user.lastName || "") &&

@@ -306,12 +306,16 @@ export async function canGenerateAi(user: AuthObject, roomId: string, limits: { 
       createdAt.getMonth() !== currentMonth ||
       createdAt.getFullYear() !== currentYear
     ) {
+      let newCount = limits.aiPerMonth;
+      if (limits.aiPerMonth === Number.POSITIVE_INFINITY) {
+        newCount = 999999; // Use a large number to represent infinity
+      }
       // Reset monthly limit
       await sql`
-        UPDATE limits SET count = ${limits.aiPerMonth}, created_at = NOW()
+        UPDATE limits SET count = ${newCount}, created_at = NOW()
         WHERE referred_id = ${user.userId!} AND type = 'aiPerMonth'
       `
-      userMonthLimit.count = limits.aiPerMonth
+      userMonthLimit.count = newCount
       userMonthLimit.created_at = now
     }
   }
@@ -399,6 +403,9 @@ export async function getSummariesByRoomId(roomId: string) {
         return uploads[0].summary
       }
       const text = await extractTextFromUrl(doc.url, doc.type as importTypes)
+      sql`
+        UPDATE uploads SET text = ${text} WHERE url = ${doc.url}
+      `
       const summary = await summarizeDocument(text)
       await uploadSummary(doc.url, summary)
       return summary
@@ -406,6 +413,39 @@ export async function getSummariesByRoomId(roomId: string) {
     return summaries
   }
   return []
+}
+
+export async function extractTextFromDocument(documentId: string) {
+
+  const documents = await sql`
+    SELECT * FROM documents WHERE id = ${documentId}
+  `
+  if (documents.length === 0) {
+    throw new Error("Document not found")
+  }
+  const document = documents[0]
+  const uploads = await sql`
+    SELECT * FROM uploads WHERE url = ${document.url}
+  `
+  if (uploads.length > 0) {
+    return {
+      title: document.url.split("/").pop() || "Document",
+      text: uploads[0].text || ""
+    }
+  }
+  // If no text is found in uploads, extract it from the URL
+  const text = await extractTextFromUrl(document.url, document.type as importTypes)
+  if (!text) {
+    throw new Error("No text found in document")
+  }
+  // Store the extracted text in the uploads table
+  await sql`
+    UPDATE uploads SET text = ${text} WHERE url = ${document.url}
+  `
+  return {
+    title: document.url.split("/").pop() || "Document",
+    text: text
+  }
 }
 
 export async function isTheirRoom(clerkId: string, roomId: string) {
@@ -477,6 +517,27 @@ export async function updatePlanAndPayment(
     await storePayment(userId, planId, paymentId, paymentAmount, paymentCurrency, paymentStatus, newPaymentDate)
   }
 
+}
+
+export async function getLastestPayment(userId: string) : Promise<
+{
+  id: string
+  user_id: string
+  plan_id: string
+  payment_id: string
+  payment_amount: number
+  payment_currency: string
+  payment_status: string
+  payment_date: Date
+  duration: number
+} | null> {
+  const plans = await sql`
+    SELECT * FROM payments WHERE user_id = ${userId} ORDER BY payment_date DESC LIMIT 1
+  `
+  if (plans.length > 0) {
+    return plans[0] as any
+  }
+  return null
 }
 
 export async function checkPlan(userId: string) {
@@ -592,7 +653,7 @@ export async function claimPromoCode(promoCode: string, clerckId: string) {
       `
       await updateMetadata(user.clerk_id, client, [{ key: "plan", value: promoCode.plan_id }])
       //create a fake payment
-      await storePayment(user.id, promoCode.plan_id, "promo_code_" + generateId(), 0, "USD", "success", new Date(), promoCode.plan_duration)
+      await storePayment(user.id, promoCode.plan_id, "promo_code_" + generateId(), 0, "PEN", "success", new Date(), promoCode.plan_duration)
       return {
         planId: promoCode.plan_id,
         duration: promoCode.plan_duration,
@@ -627,5 +688,63 @@ export async function deleteRoom(id: string) {
   `
   await sql`
     DELETE FROM rooms WHERE id = ${id}
+  `
+}
+
+export async function getSummaryById(id: string) {
+
+  const roomDocuments = await sql`
+    SELECT * FROM documents WHERE id = ${id}
+  `
+  if (roomDocuments.length === 0) {
+    return null
+  }
+
+  const uploads = await sql`
+    SELECT * FROM uploads WHERE url = ${roomDocuments[0].url}
+  `
+  if (uploads.length > 0) {
+    return uploads[0].summary
+  }
+  return null
+}
+
+export async function getChatHistoryByDocumentId(documentId: string, clerkId: string) {
+  const chatHistory = await sql`
+    SELECT ch.* FROM chat_history ch
+    JOIN users u ON ch.user_id = u.id
+    WHERE ch.document_id = ${documentId} AND u.clerk_id = ${clerkId}
+    ORDER BY ch.created_at DESC
+  `
+  return chatHistory
+}
+export async function createChatHistory(documentId: string, clerkId: string, message: string, response: string) {
+  const id = generateId()
+  
+  const user = await getUserByClerkId(clerkId)
+  if (!user) {
+    throw new Error("User not found")
+  }
+  
+  await sql`
+    INSERT INTO chat_history (id, document_id, user_id, message, response, created_at)
+    VALUES (${id}, ${documentId}, ${user.id}, ${message}, ${response}, NOW())
+  `
+  return id
+}
+
+
+export async function createChatHistoryTable() {
+  await sql`
+    CREATE TABLE IF NOT EXISTS chat_history (
+      id VARCHAR(255) PRIMARY KEY,
+      document_id VARCHAR(255) NOT NULL,
+      user_id VARCHAR(255) NOT NULL,
+      message TEXT NOT NULL,
+      response TEXT NOT NULL,
+      created_at TIMESTAMP NOT NULL DEFAULT NOW(),
+      FOREIGN KEY (document_id) REFERENCES documents(id),
+      FOREIGN KEY (user_id) REFERENCES users(id)
+    )
   `
 }

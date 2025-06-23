@@ -1,56 +1,66 @@
-import * as React from "react"
-import { Slot } from "@radix-ui/react-slot"
-import { cva, type VariantProps } from "class-variance-authority"
+"use client";
+import { cva, type VariantProps } from 'class-variance-authority';
+import React from 'react';
 
-import { cn } from "@/lib/utils"
-
-const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
+export const buttonVariants = cva(
+  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-xl shadow transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
   {
     variants: {
       variant: {
-        default: "bg-primary text-primary-foreground hover:bg-primary/90",
-        destructive:
-          "bg-destructive text-destructive-foreground hover:bg-destructive/90",
-        outline:
-          "border border-input bg-background hover:bg-accent hover:text-accent-foreground",
-        secondary:
-          "bg-secondary text-secondary-foreground hover:bg-secondary/80",
-        ghost: "hover:bg-accent hover:text-accent-foreground",
-        link: "text-primary underline-offset-4 hover:underline",
+        primary: "bg-iris text-white hover:bg-iris/90",
+        secondary: "bg-gray-500 text-white hover:bg-gray-500/90",
+        outline: "border border-iris text-iris hover:bg-iris hover:text-white",
+        ghost: "text-iris hover:bg-iris/10"
       },
       size: {
-        default: "h-10 px-4 py-2",
-        sm: "h-9 rounded-md px-3",
-        lg: "h-11 rounded-md px-8",
-        icon: "h-10 w-10",
-      },
+        sm: "px-3 py-1.5 text-sm",
+        md: "px-4 py-2",
+        lg: "px-6 py-3 text-lg",
+        xl: "px-8 py-4 text-xl",
+        icon: "p-2"
+      }
     },
     defaultVariants: {
-      variant: "default",
-      size: "default",
-    },
+      variant: "primary",
+      size: "md"
+    }
   }
-)
+);
 
 export interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement>,
     VariantProps<typeof buttonVariants> {
-  asChild?: boolean
+  asChild?: boolean;
+  label?: string;
 }
 
-const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, variant, size, asChild = false, ...props }, ref) => {
-    const Comp = asChild ? Slot : "button"
-    return (
-      <Comp
-        className={cn(buttonVariants({ variant, size, className }))}
-        ref={ref}
-        {...props}
-      />
-    )
-  }
-)
-Button.displayName = "Button"
+export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
+  ({ label, onClick, children, variant, size, asChild = false, disabled = false, className, ...props }, ref) => {
+    const buttonClassName = buttonVariants({ variant, size, className });
 
-export { Button, buttonVariants }
+    if (asChild && React.isValidElement(children)) {
+      return React.cloneElement(children, {
+        className: `${(children.props as any).className || ''} ${buttonClassName}`.trim(),
+        onClick: disabled ? undefined : (event: React.MouseEvent) => {
+          onClick?.(event as React.MouseEvent<HTMLButtonElement>);
+          (children.props as any).onClick?.(event);
+        },
+        disabled,
+      } as any);
+    }
+
+    return (
+      <button
+        ref={ref}
+        onClick={disabled ? undefined : onClick}
+        disabled={disabled}
+        className={buttonClassName}
+        {...props}
+      >
+        {children || label}
+      </button>
+    );
+  }
+);
+
+Button.displayName = "Button";

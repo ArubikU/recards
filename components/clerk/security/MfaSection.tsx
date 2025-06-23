@@ -52,9 +52,9 @@ export const MfaSection = () => {
               </div>
             </div>
             <div className="flex items-center gap-2">
-              {method.enabled && <Badge>Activado</Badge>}
+              {method.enabled && <Badge label="Activado" variant="defaultrounded"></Badge>}
               <Button 
-                variant={method.enabled ? "outline" : "default"}
+                variant={method.enabled ? "outline" : "primary"}
                 onClick={() => method.enabled 
                   ? handleToggleMfa(method.id) 
                   : handleSetupMfa(method.id)
@@ -70,13 +70,13 @@ export const MfaSection = () => {
       {/* Diálogo para configurar TOTP */}
       {showQRCode && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
-          <div className="bg-white p-6 rounded-lg shadow-lg max-w-md w-full">
+          <div className="bg-ivory p-6 rounded-lg shadow-lg max-w-md w-full">
             <h2 className="text-xl font-bold mb-4">Configurar autenticador</h2>
             <div className="space-y-4">
               <p className="text-sm">Escanea este código QR con tu aplicación de autenticación:</p>
               {/* Aquí iría la imagen del código QR */}
               <div className="bg-gray-200 h-40 w-40 mx-auto flex items-center justify-center">
-                <p className="text-sm text-gray-500">Código QR de ejemplo</p>
+                <p className="text-sm text-ink">Código QR de ejemplo</p>
               </div>
               <p className="text-sm">O ingresa este código manualmente:</p>
               <div className="bg-gray-100 p-2 rounded text-center font-mono">

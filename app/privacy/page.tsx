@@ -8,18 +8,18 @@ export default function PrivacyPage() {
       <div className="max-w-3xl mx-auto space-y-12">
         <header className="text-center">
           <h1 className="text-4xl font-extrabold text-gray-900 mb-2">Política de Privacidad</h1>
-          <p className="text-sm text-gray-500">Última actualización: 14 de mayo de 2025</p>
+          <p className="text-sm text-ink">Última actualización: 14 de mayo de 2025</p>
         </header>
 
         <section className="space-y-4">
-          <p className="text-gray-700 leading-relaxed text-lg">
-            En <strong>ReCards</strong>, proteger tu privacidad es una prioridad. Esta política detalla qué datos
+          <p className="text-ink leading-relaxed text-lg">
+            En <strong>Nootiq</strong>, proteger tu privacidad es una prioridad. Esta política detalla qué datos
             recopilamos, cómo los usamos y tus derechos como usuario.
           </p>
         </section>
 
         <Section
-          icon={<FileText className="text-[#FF7A00] w-6 h-6" />}
+          icon={<FileText className="text-iris w-6 h-6" />}
           title="Información que recopilamos"
           items={[
             {
@@ -46,7 +46,7 @@ export default function PrivacyPage() {
         />
 
         <Section
-          icon={<ShieldCheck className="text-[#FF7A00] w-6 h-6" />}
+          icon={<ShieldCheck className="text-iris w-6 h-6" />}
           title="Cómo utilizamos tu información"
           items={[
             { title: "Mejorar la plataforma", description: "Optimizar funciones y rendimiento." },
@@ -59,7 +59,7 @@ export default function PrivacyPage() {
         />
 
         <Section
-          icon={<Users className="text-[#FF7A00] w-6 h-6" />}
+          icon={<Users className="text-iris w-6 h-6" />}
           title="Con quién compartimos tu información"
           items={[
             {
@@ -81,13 +81,13 @@ export default function PrivacyPage() {
         />
 
         <Section
-          icon={<AlertTriangle className="text-[#FF7A00] w-6 h-6" />}
+          icon={<AlertTriangle className="text-iris w-6 h-6" />}
           title="Seguridad de los datos"
           paragraph="Aplicamos medidas de seguridad físicas, técnicas y administrativas. Aunque trabajamos constantemente en proteger tu información, ningún sistema es 100% infalible."
         />
 
         <Section
-          icon={<ShieldCheck className="text-[#FF7A00] w-6 h-6" />}
+          icon={<ShieldCheck className="text-iris w-6 h-6" />}
           title="Tus derechos"
           items={[
             { title: "Acceder", description: "Ver los datos que almacenamos sobre ti." },
@@ -98,10 +98,10 @@ export default function PrivacyPage() {
           ]}
         />
         {/**
-        <p className="text-gray-700 leading-relaxed">
+        <p className="text-ink leading-relaxed">
           Para ejercer estos derechos, contáctanos en{" "}
-          <a href="mailto:privacy@recards.com" className="text-[#FF7A00] hover:underline font-medium">
-            privacy@recards.com
+          <a href="mailto:privacy@Nootiq.com" className="text-iris hover:underline font-medium">
+            privacy@Nootiq.com
           </a>
           .
         </p>
@@ -112,12 +112,12 @@ export default function PrivacyPage() {
         />
 
                 <Section
-          icon={<Mail className="text-[#FF7A00] w-6 h-6" />}
+          icon={<Mail className="text-iris w-6 h-6" />}
           title="Contacto"
           paragraph={
             <>
               ¿Dudas o sugerencias?{" "}
-              <a href="/contact" className="text-[#FF7A00] hover:underline font-medium">
+              <a href="/contact" className="text-iris hover:underline font-medium">
                 escribenos
               </a>
               .
@@ -146,13 +146,13 @@ function Section({
         {icon && <div>{icon}</div>}
         <h2 className="text-2xl font-semibold text-gray-900">{title}</h2>
       </div>
-      {paragraph && <p className="text-gray-700 leading-relaxed">{paragraph}</p>}
+      {paragraph && <p className="text-ink leading-relaxed">{paragraph}</p>}
       {items && (
         <ul className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
           {items.map((item, i) => (
             <li key={i} className="bg-gray-50 p-4 rounded-lg shadow-sm border hover:shadow-md transition">
-              <h3 className="font-semibold text-gray-800">{item.title}</h3>
-              <p className="text-gray-600 text-sm mt-1">{item.description}</p>
+              <h3 className="font-semibold text-ink">{item.title}</h3>
+              <p className="text-ink text-sm mt-1">{item.description}</p>
             </li>
           ))}
         </ul>

@@ -2,7 +2,7 @@
 
 import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
-import { renderToString } from "katex"
+import { MathJax } from "better-react-mathjax"
 import { ChevronLeft } from "lucide-react"
 import Link from "next/link"
 import { useState } from "react"
@@ -35,12 +35,7 @@ export default function QuizQuestionsClient({ questions, quizTitle, roomId }: Qu
     }
   
     const processed = containsMath(value) ? value : `\\text{${value}}`
-    return <div dangerouslySetInnerHTML={{ __html: renderToString(processed, {
-        displayMode: false,
-        output: 'html',
-        throwOnError: false,
-        strict: false
-      }) }} />
+  return <MathJax>{processed}</MathJax>
   }
   
 
@@ -68,7 +63,7 @@ export default function QuizQuestionsClient({ questions, quizTitle, roomId }: Qu
           <Card key={question.id} className="p-4 overflow-hidden">
             <div className="flex justify-between items-start">
               <div className="flex gap-3 items-start">
-                <div className="flex-shrink-0 h-8 w-8 rounded-full bg-orange-100 text-orange-600 flex items-center justify-center font-medium">
+                <div className="flex-shrink-0 h-8 w-8 rounded-full bg-irisforeground text-irisdark flex items-center justify-center font-medium">
                   {index + 1}
                 </div>
                 <div>
@@ -89,7 +84,7 @@ export default function QuizQuestionsClient({ questions, quizTitle, roomId }: Qu
 
             {expandedQuestion === question.id && (
               <div className="mt-4 pl-11 border-t pt-3">
-                <p className="text-sm text-gray-500 mb-2">Opciones:</p>
+                <p className="text-sm text-ink mb-2">Opciones:</p>
                 <div className="space-y-2">
                   {Object.entries(question.options).map(([key, value]) => (
                     <div 
@@ -104,7 +99,7 @@ export default function QuizQuestionsClient({ questions, quizTitle, roomId }: Qu
                         <div className={`h-5 w-5 rounded-full flex items-center justify-center text-xs mr-2 ${
                           key === question.correct_option 
                             ? "bg-green-500 text-white" 
-                            : "bg-gray-300 text-gray-700"
+                            : "bg-gray-300 text-ink"
                         }`}>
                           {key}
                         </div>
@@ -119,7 +114,7 @@ export default function QuizQuestionsClient({ questions, quizTitle, roomId }: Qu
                 {question.explanation && (
                   <div className="mt-3 pt-3 border-t">
                     <p className="text-sm font-medium mb-1">Explicación:</p>
-                    <p className="text-sm text-gray-700" dangerouslySetInnerHTML={{ __html: question.explanation }} />
+                    <p className="text-sm text-ink" dangerouslySetInnerHTML={{ __html: question.explanation }} />
                   </div>
                 )}
               </div>

@@ -3,21 +3,21 @@ import Link from "next/link";
 
 export default function AboutPage() {
   return (
-    <div className="bg-[#fefefe] text-gray-800">
+    <div className="bg-ivory text-ink">
       <div className="container mx-auto px-6 py-16 max-w-5xl">
-        <h1 className="text-5xl font-extrabold text-center text-[#FF7A00] mb-8">Descubre ReCards</h1>
-        <p className="text-center text-lg text-gray-600 mb-12">
-          ReCards convierte documentos en flashcards y quizzes con inteligencia artificial. Estudiar nunca fue tan fácil.
+        <h1 className="text-5xl font-extrabold text-center text-iris mb-8">Descubre Nootiq</h1>
+        <p className="text-center text-lg text-ink mb-12">
+          Nootiq convierte documentos en material de estudio con inteligencia artificial. Estudiar nunca fue tan fácil.
         </p>
 
         {/* Sección: Misión */}
         <section className="mb-16">
           <div className="flex items-center gap-3 mb-4">
-            <Lightbulb className="text-[#FF7A00]" />
+            <Lightbulb className="text-iris" />
             <h2 className="text-2xl font-bold">Nuestra Misión</h2>
           </div>
-          <p className="text-gray-700 leading-relaxed">
-            En ReCards, el objetivo es simplificar el aprendizaje. Convertir materiales densos en experiencias memorables,
+          <p className="text-ink leading-relaxed">
+            En Nootiq, el objetivo es simplificar el aprendizaje. Convertir materiales densos en experiencias memorables,
             personalizadas y accesibles, para estudiantes, autodidactas y profesionales que valoran su tiempo.
           </p>
         </section>
@@ -25,7 +25,7 @@ export default function AboutPage() {
         {/* Sección: Cómo funciona */}
         <section className="mb-16">
           <div className="flex items-center gap-3 mb-4">
-            <BrainCog className="text-[#FF7A00]" />
+            <BrainCog className="text-iris" />
             <h2 className="text-2xl font-bold">¿Cómo Funciona?</h2>
           </div>
           <div className="grid md:grid-cols-3 gap-6 mt-6">
@@ -33,12 +33,12 @@ export default function AboutPage() {
               {
                 icon: <UploadCloud className="w-8 h-8" />,
                 title: "1. Sube tu Documento",
-                text: "Carga un PDF o pega un link. ReCards se encarga del resto."
+                text: "Carga un PDF o pega un link. Nootiq se encarga del resto."
               },
               {
                 icon: <BrainCog className="w-8 h-8" />,
                 title: "2. Procesamiento Inteligente",
-                text: "La IA analiza y genera flashcards y quizzes automáticamente."
+                text: "La IA analiza y genera material de estudio automáticamente."
               },
               {
                 icon: <BookOpenCheck className="w-8 h-8" />,
@@ -46,10 +46,10 @@ export default function AboutPage() {
                 text: "Refuerza conocimientos con métodos interactivos y eficaces."
               }
             ].map(({ icon, title, text }, idx) => (
-              <div key={idx} className="bg-white shadow-lg rounded-xl p-6 transition hover:scale-[1.02] duration-300">
-                <div className="mb-4 text-[#FF7A00]">{icon}</div>
+              <div key={idx} className="bg-ivory shadow-lg rounded-xl p-6 transition hover:scale-[1.02] duration-300">
+                <div className="mb-4 text-iris">{icon}</div>
                 <h3 className="font-semibold text-lg mb-2">{title}</h3>
-                <p className="text-gray-600">{text}</p>
+                <p className="text-ink">{text}</p>
               </div>
             ))}
           </div>
@@ -57,11 +57,11 @@ export default function AboutPage() {
 
         {/* Sección: Tecnología */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold mb-4">Tecnología que Impulsa ReCards</h2>
-          <p className="text-gray-700 mb-4">
+          <h2 className="text-2xl font-bold mb-4">Tecnología que Impulsa Nootiq</h2>
+          <p className="text-ink mb-4">
             Todo el sistema está construido sobre una base sólida de tecnología moderna:
           </p>
-          <ul className="list-disc pl-6 text-gray-700 space-y-2">
+          <ul className="list-disc pl-6 text-ink space-y-2">
             <li><strong>Cohere AI</strong> – Generación de contenido educativo con procesamiento de lenguaje natural.</li>
             <li><strong>Next.js</strong> – Navegación ultrarrápida y experiencia fluida.</li>
             <li><strong>Neon PostgreSQL</strong> – Almacenamiento seguro y escalable.</li>
@@ -72,8 +72,8 @@ export default function AboutPage() {
         {/* Sección: Equipo */}
         <section className="mb-20">
           <h2 className="text-2xl font-bold mb-4">Quién está detrás</h2>
-          <p className="text-gray-700 leading-relaxed">
-            ReCards nace de la mente de <strong>arubik</strong>, una persona apasionada por la educación, la eficiencia
+          <p className="text-ink leading-relaxed">
+            Nootiq nace de la mente de <strong>arubik</strong>, una persona apasionada por la educación, la eficiencia
             y el potencial de la inteligencia artificial. La plataforma busca empoderar a quienes desean aprender
             mejor y más rápido, con una herramienta intuitiva y poderosa.
           </p>
@@ -82,8 +82,8 @@ export default function AboutPage() {
         {/* CTA Final */}
         <div className="text-center">
           <Link href="/register" legacyBehavior>
-            <a className="bg-[#FF7A00] hover:bg-orange-600 text-white px-10 py-4 rounded-full text-lg font-semibold transition">
-              Comienza a usar ReCards hoy
+            <a className="bg-iris hover:bg-irisdark text-white px-10 py-4 rounded-full text-lg font-semibold transition">
+              Comienza a usar Nootiq hoy
             </a>
           </Link>
         </div>

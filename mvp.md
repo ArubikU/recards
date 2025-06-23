@@ -1,4 +1,4 @@
-## 🧠 Roadmap Técnico Detallado - MVP ReCards
+## 🧠 Roadmap Técnico Detallado - MVP Nootiq
 
 ### 🧩 Etapa 1: Configuración Inicial
 

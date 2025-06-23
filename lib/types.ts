@@ -32,3 +32,11 @@ export const SortMethods = {
   "date-asc": (a: { created_at: string }, b: { created_at: string }) => new Date(a.created_at).getTime() - new Date(b.created_at).getTime(),
   "date-desc": (a: { created_at: string }, b: { created_at: string }) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime(),
 }
+export type chatHistory = {
+  id: string
+  document_id: string
+  user_id: string
+  message: string
+  response: string
+  created_at: string
+}

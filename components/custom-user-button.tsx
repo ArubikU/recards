@@ -1,7 +1,7 @@
 "use client"
 
 import { Button } from "@/components/ui/button"
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog"
+import { GenericDialog, GenericDialogContent, GenericDialogHeader, GenericDialogTitle } from "@/components/ui/gdialog"
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
 import { useClerk, useUser } from "@clerk/nextjs"
 import { LogOut, Menu, Settings, Shield, User } from 'lucide-react'
@@ -11,6 +11,7 @@ import ProfileTab from "./clerk/profile-tab"
 import ProtectedByClerkFooter from "./clerk/protected-by"
 import SecurityTab from "./clerk/security-tab"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "./ui/dropdown-menu"
+import { GenericButton } from "./ui/gbutton"
 // Tipos
 type UserProfilePageProps = {
     label: string
@@ -21,8 +22,8 @@ type UserProfilePageProps = {
 
 // Contexto para compartir el estado del diálogo
 type UserButtonContextType = {
-    activeDialog: string | null
-    setActiveDialog: (dialog: string | null) => void
+    activeGenericDialog: string | null
+    setActiveGenericDialog: (dialog: string | null) => void
     user: any
     signOut: () => Promise<void>
     requirePassword: <T>(callback: (password: string) => Promise<T>) => Promise<T | null>
@@ -30,8 +31,8 @@ type UserButtonContextType = {
 
 // Contexto para compartir el estado del diálogo
 const UserButtonContext = createContext<UserButtonContextType>({
-    activeDialog: null,
-    setActiveDialog: () => { },
+    activeGenericDialog: null,
+    setActiveGenericDialog: () => { },
     user: null,
     signOut: async () => { },
     requirePassword: async () => null,
@@ -64,7 +65,7 @@ function CustomUserButton({
     const { user, isLoaded, isSignedIn } = useUser()
     const { signOut: clerkSignOut } = useClerk()
     const [isOpen, setIsOpen] = useState(false)
-    const [activeDialog, setActiveDialog] = useState<string | null>(null)
+    const [activeGenericDialog, setActiveGenericDialog] = useState<string | null>(null)
     const [activeTab, setActiveTab] = useState("profile")
     // Simulamos los dispositivos activos
     const [devices, setDevices] = useState<DeviceType[]>([])
@@ -188,8 +189,8 @@ function CustomUserButton({
     return (
         <UserButtonContext.Provider
             value={{
-                activeDialog,
-                setActiveDialog,
+                activeGenericDialog,
+                setActiveGenericDialog,
                 user,
                 signOut: handleSignOut,
                 requirePassword,
@@ -199,7 +200,7 @@ function CustomUserButton({
                 {/* Dropdown del usuario */}
                 <Popover open={isOpen} onOpenChange={setIsOpen}>
                     <PopoverTrigger asChild>
-                        <Button variant="ghost" className="h-8 w-8 rounded-full p-0">
+                        <GenericButton variant="ghost" className="h-8 w-8 rounded-full p-0">
                             <div className="flex items-center">
                                 <Image
                                     src={user.imageUrl || "/placeholder.svg?height=32&width=32"}
@@ -210,9 +211,9 @@ function CustomUserButton({
                                 />
                                 {showName && <span className="ml-2 text-sm font-medium">{user.fullName}</span>}
                             </div>
-                        </Button>
+                        </GenericButton>
                     </PopoverTrigger>
-                    <PopoverContent className="w-80 max-w-xs p-0 bg-white rounded-xl" align="end">
+                    <PopoverContent className="w-80 max-w-xs p-0 bg-ivory rounded-xl" align="end">
                         <div className="p-2 border-b">
                             <div className="flex items-center gap-2 p-2">
                                 <Image
@@ -229,50 +230,50 @@ function CustomUserButton({
                             </div>
                         </div>
                         <div className="p-1 space-y-2">
-                            <Button
+                            <GenericButton
                                 variant="ghost"
-                                className="w-full justify-start gap-2 px-5 py-3 text-sm text-gray-700 h-12"
-                                onClick={() => setActiveDialog("manage")}
+                                className="w-full justify-start gap-2 px-5 py-3 text-sm text-ink h-12"
+                                onClick={() => setActiveGenericDialog("manage")}
                             >
                                 <span className="mr-2">
                                     <Settings className="h-4 w-4" />
                                 </span>
                                 Manage account
-                            </Button>
+                            </GenericButton>
                             {customPagesPortals.map((page, index) => (
                                 <React.Fragment key={index}>
                                     <div className="border-b" />
-                                    <Button
+                                    <GenericButton
                                         variant="ghost"
-                                        className="w-full justify-start gap-2 px-5 py-3 text-sm text-gray-700 h-12"
-                                        onClick={() => setActiveDialog(page.props.url)}
+                                        className="w-full justify-start gap-2 px-5 py-3 text-sm text-ink h-12"
+                                        onClick={() => setActiveGenericDialog(page.props.url)}
                                     >
                                         <span className="mr-2">{page.props.labelIcon}</span>
                                         {page.props.label}
-                                    </Button>
+                                    </GenericButton>
                                 </React.Fragment>
                             ))}
                             <div className="border-b" />
-                            <Button
+                            <GenericButton
                                 variant="ghost"
-                                className="w-full justify-start gap-2 px-5 py-3 text-sm text-gray-700 h-12"
+                                className="w-full justify-start gap-2 px-5 py-3 text-sm text-ink h-12"
                                 onClick={handleSignOut}
                             >
                                 <span className="mr-2">
                                     <LogOut className="h-4 w-4" />
                                 </span>
                                 Sign out
-                            </Button>
+                            </GenericButton>
                         </div>
                     </PopoverContent>
                 </Popover>
 
                 {/* Diálogo de gestión de cuenta predeterminado */}
-                <Dialog open={activeDialog === "manage"} onOpenChange={(open) => !open && setActiveDialog(null)}>
+                <GenericDialog open={activeGenericDialog === "manage"} onOpenChange={(open) => !open && setActiveGenericDialog(null)}>
 
-                    <DialogContent className="rounded-xl max-w-4xl p-0 h-[80vh] flex overflow-hidden bg-gray-50">
+                    <GenericDialogContent className="rounded-xl max-w-4xl p-0 h-[80vh] flex overflow-hidden bg-gray-50">
                         {/* Sidebar */}
-                        <DialogTitle className="hidden" />
+                        <GenericDialogTitle className="hidden" />
                         {isMobile ? (
                             <div className="absolute bottom-4 right-4 z-10">
                                 <DropdownMenu>
@@ -285,7 +286,7 @@ function CustomUserButton({
                                             <Menu className="h-6 w-6" />
                                         </Button>
                                     </DropdownMenuTrigger>
-                                    <DropdownMenuContent className="w-48 bg-white rounded-xl shadow-lg">
+                                    <DropdownMenuContent className="w-48 bg-ivory rounded-xl shadow-lg">
                                         <DropdownMenuItem onClick={() => setActiveTab("profile")}>
                                             <User className="h-4 w-4 mr-2" />
                                             Profile
@@ -307,7 +308,7 @@ function CustomUserButton({
                             <div className="w-64 border-r h-full bg-gray-200 flex flex-col">
                                 <div className="p-6">
                                     <h2 className="text-xl font-semibold">Account</h2>
-                                    <p className="text-gray-500 text-sm">Manage your account info.</p>
+                                    <p className="text-ink text-sm">Manage your account info.</p>
                                 </div>
                                 <div className="space-y-1 px-2 flex-1">
                                     <Button
@@ -362,10 +363,10 @@ function CustomUserButton({
                                 </div>
                             )}
                         </div>
-                    </DialogContent>
-                </Dialog>
+                    </GenericDialogContent>
+                </GenericDialog>
                 {/* Current Password Modal */}
-                <Dialog
+                <GenericDialog
                     open={isCurrentPasswordModalOpen}
                     onOpenChange={(open) => {
                         if (!open) {
@@ -374,10 +375,10 @@ function CustomUserButton({
                         setIsCurrentPasswordModalOpen(open)
                     }}
                 >
-                    <DialogContent className="rounded-xl max-w-md p-6 bg-white">
-                        <DialogTitle>Confirm your password</DialogTitle>
+                    <GenericDialogContent className="rounded-xl max-w-md p-6 bg-ivory">
+                        <GenericDialogTitle>Confirm your password</GenericDialogTitle>
                         <div className="space-y-4 py-4">
-                            <p className="text-sm text-gray-600">
+                            <p className="text-sm text-ink">
                                 For your security, please confirm your current password to continue.
                             </p>
                             <div className="space-y-2">
@@ -409,21 +410,21 @@ function CustomUserButton({
                                 Cancel
                             </Button>
                             <Button
-                                className="bg-gray-800 rounded-xl text-white hover:bg-gray-600"
+                                className="bg-gray-800 rounded-xl text-white hover:bg-ink"
                                 disabled={isVerifyingPassword || currentPassword.trim() === ""}
                                 onClick={handlePasswordVerification}
                             >
                                 {isVerifyingPassword ? "Verifying..." : "Confirm"}
                             </Button>
                         </div>
-                    </DialogContent>
-                </Dialog>
-                {/* Update Password Dialog */}
-                <Dialog open={activeDialog === "updatePassword"} onOpenChange={(open) => !open && setActiveDialog(null)}>
-                    <DialogContent className="rounded-xl max-w-md p-6 bg-white">
-                        <DialogHeader>
-                            <DialogTitle>Update your password</DialogTitle>
-                        </DialogHeader>
+                    </GenericDialogContent>
+                </GenericDialog>
+                {/* Update Password GenericDialog */}
+                <GenericDialog open={activeGenericDialog === "updatePassword"} onOpenChange={(open) => !open && setActiveGenericDialog(null)}>
+                    <GenericDialogContent className="rounded-xl max-w-md p-6 bg-ivory">
+                        <GenericDialogHeader>
+                            <GenericDialogTitle>Update your password</GenericDialogTitle>
+                        </GenericDialogHeader>
                         <div className="space-y-4 py-4">
                             <div className="space-y-2">
                                 <label htmlFor="new-password" className="text-sm font-medium">
@@ -449,13 +450,13 @@ function CustomUserButton({
                             </div>
                         </div>
                         <div className="flex justify-end gap-4">
-                            <Button variant="ghost" className="hover:bg-gray-100 rounded-xl" onClick={() => setActiveDialog(null)}>
+                            <Button variant="ghost" className="hover:bg-gray-100 rounded-xl" onClick={() => setActiveGenericDialog(null)}>
                                 Cancel
                             </Button>
-                            <Button className="bg-gray-800 rounded-xl text-white hover:bg-gray-600">Update Password</Button>
+                            <Button className="bg-gray-800 rounded-xl text-white hover:bg-ink">Update Password</Button>
                         </div>
-                    </DialogContent>
-                </Dialog>
+                    </GenericDialogContent>
+                </GenericDialog>
             </header>
         </UserButtonContext.Provider>
     )
@@ -463,25 +464,25 @@ function CustomUserButton({
 
 // Componente para páginas de perfil personalizadas
 function UserProfilePage({ label, url, labelIcon, children }: UserProfilePageProps) {
-    const { setActiveDialog } = useUserButton()
+    const { setActiveGenericDialog } = useUserButton()
 
     return (
         <Fragment>
-            <DialogHeader className="sticky top-0 z-10 bg-white border-b p-4 flex flex-row items-center justify-between">
-                <DialogTitle>{label}</DialogTitle>
-            </DialogHeader>
+            <GenericDialogHeader className="sticky top-0 z-10 bg-ivory border-b p-4 flex flex-row items-center justify-between">
+                <GenericDialogTitle>{label}</GenericDialogTitle>
+            </GenericDialogHeader>
             <div className="p-6 overflow-auto">{children}</div>
         </Fragment>
     )
 }
 function UserProfileLink({ label, url, labelIcon }: UserProfilePageProps) {
-    const { setActiveDialog } = useUserButton()
+    const { setActiveGenericDialog } = useUserButton()
 
     return (
         <Button
             variant="ghost"
             className="w-full justify-start gap-2 px-2 py-1.5 text-sm"
-            onClick={() => setActiveDialog(url)}
+            onClick={() => setActiveGenericDialog(url)}
         >
             {labelIcon}
             {label}

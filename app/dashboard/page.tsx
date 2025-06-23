@@ -38,10 +38,10 @@ export default async function Dashboard() {
       {/* Header */}
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-10 gap-4">
         <div>
-          <h1 className="text-4xl font-bold text-gray-800">Bienvenido de vuelta</h1>
+          <h1 className="text-4xl font-bold text-ink">Bienvenido de vuelta</h1>
           {!currentPlan.isUltimate && (
-            <p className="text-sm text-gray-500 mt-2">
-              Rooms restantes: <span className="font-medium text-[#FF7A00]">{leftRoomsCount}</span> / {limits.rooms}
+            <p className="text-sm text-ink mt-2">
+              Rooms restantes: <span className="font-medium text-iris">{leftRoomsCount}</span> / {limits.rooms}
             </p>
           )}
         </div>
@@ -51,8 +51,8 @@ export default async function Dashboard() {
       {/* Grid */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         {/* Rooms Recientes */}
-        <div className="lg:col-span-2 bg-white shadow-xl rounded-2xl p-6">
-          <h2 className="text-2xl font-semibold mb-6 text-[#FF7A00]">Rooms Recientes</h2>
+        <div className="lg:col-span-2 bg-ivory shadow-xl rounded-2xl p-6">
+          <h2 className="text-2xl font-semibold mb-6 text-iris">Rooms Recientes</h2>
           {rooms.length > 0 ? (
             <>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -62,14 +62,14 @@ export default async function Dashboard() {
             </div>
 
             <div className="mt-6 text-center">
-              <Link href="/rooms" className="text-[#FF7A00] hover:underline">
+              <Link href="/rooms" className="text-iris hover:underline">
                 Ver todas las Rooms
               </Link>
             </div>
             </>
           ) : (
             <div className="text-center py-10">
-              <p className="text-gray-500 mb-4">Aún no has creado ningún room.</p>
+              <p className="text-ink mb-4">Aún no has creado ningún room.</p>
               <Link href="/rooms/new" className="btn-primary">
                 Crear tu primer Room
               </Link>
@@ -78,12 +78,12 @@ export default async function Dashboard() {
         </div>
 
         {/* Estadísticas */}
-        <div className="bg-white shadow-xl rounded-2xl p-6">
-          <h2 className="text-2xl font-semibold mb-6 text-[#FF7A00]">Estadísticas</h2>
+        <div className="bg-ivory shadow-xl rounded-2xl p-6">
+          <h2 className="text-2xl font-semibold mb-6 text-iris">Estadísticas</h2>
           <div className="space-y-6">
-            <StatBox icon={<Layers className="text-[#FF7A00]" />} label="Total de Rooms" value={rooms.length} />
-            <StatBox icon={<Book className="text-[#FF7A00]" />} label="Flashcards Creadas" value="-" />
-            <StatBox icon={<ClipboardList className="text-[#FF7A00]" />} label="Quizzes Completados" value="-" />
+            <StatBox icon={<Layers className="text-iris" />} label="Total de Rooms" value={rooms.length} />
+            <StatBox icon={<Book className="text-iris" />} label="Flashcards Creadas" value="-" />
+            <StatBox icon={<ClipboardList className="text-iris" />} label="Quizzes Completados" value="-" />
           </div>
         </div>
       </div>
@@ -94,12 +94,12 @@ export default async function Dashboard() {
 function StatBox({ icon, label, value }: { icon: React.ReactNode; label: string; value: string | number }) {
   return (
     <div className="flex items-center gap-4">
-      <div className="w-12 h-12 bg-[#FF7A00]/10 flex items-center justify-center rounded-full">
+      <div className="w-12 h-12 bg-iris/10 flex items-center justify-center rounded-full">
         {icon}
       </div>
       <div>
-        <p className="text-gray-500 text-sm">{label}</p>
-        <p className="text-xl font-bold text-gray-800">{value}</p>
+        <p className=" text-sm">{label}</p>
+        <p className="text-xl font-bold text-gray-ink">{value}</p>
       </div>
     </div>
   );

@@ -32,11 +32,11 @@ export default function RoomCard({ room }: RoomCardProps) {
   return (
     <Link
       href={`/rooms/${room.id}`}
-      className="group block rounded-2xl border border-gray-200 bg-white shadow-sm hover:shadow-xl hover:scale-[1.01] transition-all duration-200 overflow-hidden"
+      className="group block rounded-2xl border border-gray-200 bg-ivory shadow-sm hover:shadow-xl hover:scale-[1.01] transition-all duration-200 overflow-hidden"
     >
       <div className="p-4">
         <div className="flex justify-between items-start">
-          <h2 className="text-lg font-semibold text-gray-800 group-hover:text-orange-600 transition-colors">
+          <h2 className="text-lg font-semibold text-ink group-hover:text-irisdark transition-colors">
             {room.title}
           </h2>
           <button
@@ -49,7 +49,7 @@ export default function RoomCard({ room }: RoomCardProps) {
           </button>
         </div>
 
-        <p className="text-sm text-gray-600 mt-2 line-clamp-3">
+        <p className="text-sm text-ink mt-2 line-clamp-3">
           {room.description || "Sin descripción"}
         </p>
 
@@ -58,7 +58,7 @@ export default function RoomCard({ room }: RoomCardProps) {
             {room.tags.map((tag, i) => (
               <span
                 key={i}
-                className="bg-orange-50 text-orange-600 text-xs px-2 py-1 rounded-full font-medium"
+                className="bg-orange-50 text-irisdark text-xs px-2 py-1 rounded-full font-medium"
               >
                 #{tag}
               </span>
@@ -67,13 +67,13 @@ export default function RoomCard({ room }: RoomCardProps) {
         )}
         {(!room.tags || room.tags.length === 0) && (
           <div className="flex flex-wrap gap-2 mt-4">
-            <span className="bg-gray-50 text-gray-600 text-xs px-2 py-1 rounded-full font-medium">
+            <span className="bg-gray-50 text-ink text-xs px-2 py-1 rounded-full font-medium">
               Sin etiquetas
               </span>
               </div>
             )}
       </div>
-      <div className="mt-auto w-full bg-gray-50 px-4 py-2 text-xs text-gray-500 border-t">
+      <div className="mt-auto w-full bg-gray-50 px-4 py-2 text-xs text-ink border-t">
         Creado el {new Date(room.created_at).toLocaleDateString()}
       </div>
     </Link>

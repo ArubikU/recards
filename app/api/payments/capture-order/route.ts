@@ -1,4 +1,4 @@
-import { plans } from "@/components/pricing/billingLabels"
+import { CURRENCY, plans, WAYS_KEYS } from "@/components/pricing/billingLabels"
 import { storePayment, updateMetadata, updatePlanAndPayment } from "@/lib/db"
 import { clerkClient } from "@clerk/nextjs/server"
 import { type NextRequest, NextResponse } from "next/server"
@@ -11,6 +11,7 @@ export async function GET(request: NextRequest) {
     const userId = searchParams.get("userId")
     const isUpdate = searchParams.get("isUpdate") === "true"
     const period = searchParams.get("period") || "monthly"
+    const currency = searchParams.get("currency") || "PEN"
 
 
     const plan = plans.find((plan) => plan.id === planId)
@@ -18,7 +19,7 @@ export async function GET(request: NextRequest) {
     if (!orderId || !planId || !userId || !plan) {
       return NextResponse.redirect(`${process.env.NEXT_PUBLIC_APP_URL}/pricing?error=missing_params`)
     }
-    let waitedPrice = plan.prices[period as keyof typeof plan.prices]
+    let waitedPrice = Number.parseFloat(plan.prices[currency as CURRENCY][period as WAYS_KEYS].toString())
     let days = 31
     if (period === "quarterly") {
       waitedPrice = waitedPrice * 4
@@ -68,18 +69,12 @@ export async function GET(request: NextRequest) {
 }
 
 async function storePaymentInfo(userId: string, planId: string, paypalData: any, isUpdate: boolean, days: number) {
-  // Store payment information in your database
-  // This is a placeholder function - implement according to your database structure
   try {
     const paymentId = paypalData.id
     const paymentAmount = paypalData.purchase_units[0].payments.captures[0].amount.value
     const paymentCurrency = paypalData.purchase_units[0].payments.captures[0].amount.currency_code
     const paymentStatus = paypalData.status
     const paymentDate = new Date()
-
-    // Example implementation using your database functions
-    // await createPayment(userId, planId, paymentId, paymentAmount, paymentCurrency, paymentStatus, paymentDate);
-
     if(isUpdate) {
       updatePlanAndPayment(userId, planId, paymentId, paymentAmount, paymentCurrency, paymentStatus)
     }else{

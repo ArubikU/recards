@@ -38,7 +38,7 @@ function GenerateFlashcardsButton({ roomId }: { roomId: string }) {
         <button
             onClick={handleClick}
             disabled={loading}
-            className="text-xs bg-[#FF7A00] text-white px-2 py-1 rounded hover:bg-[#E56E00] disabled:opacity-50"
+            className="text-xs bg-iris text-white px-2 py-1 rounded hover:bg-irisdark disabled:opacity-50"
         >
             {loading ? "Generando..." : "Generar"}
         </button>

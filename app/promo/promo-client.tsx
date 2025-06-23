@@ -92,15 +92,15 @@ useEffect(() => {
   };
 
   const PromoInfoCard = () => (
-    <Card className="shadow-md">
+    <Card className="shadow-md px-4 py-5 p-2">
       <CardHeader>
-        <CardTitle className="text-orange-600">Tu Plan Actual</CardTitle>
+        <CardTitle className="text-irisdark">Tu Plan Actual</CardTitle>
         <CardDescription>Detalles de tu suscripción activa</CardDescription>
       </CardHeader>
       <CardContent className="grid gap-3 text-sm">
         <div className="flex justify-between">
           <span className="font-medium text-muted-foreground">Plan:</span>
-          <span className="font-semibold text-orange-600">{currentPlan}</span>
+          <span className="font-semibold text-irisdark">{currentPlan}</span>
         </div>
         {expirationDate !== "No disponible" && planId !== "free" && (
           <div className="flex justify-between">
@@ -118,7 +118,7 @@ useEffect(() => {
       animate={{ y: 0, opacity: 1 }}
       transition={{ type: "spring", stiffness: 120 }}
     >
-      <Card className="bg-green-50 border border-green-200">
+      <Card className="bg-green-50 border border-green-200 px-4 py-5 p-2">
         <CardHeader>
           <CardTitle className="text-green-700">
             ¡Código Promocional Activado!
@@ -127,7 +127,7 @@ useEffect(() => {
         <CardContent className="grid gap-3 text-sm">
           <div className="flex justify-between">
             <span className="text-muted-foreground">Plan Activado:</span>
-            <span className="font-bold text-orange-600">{claimedPlan}</span>
+            <span className="font-bold text-irisdark">{claimedPlan}</span>
           </div>
           <div className="flex justify-between">
             <span className="text-muted-foreground">Duración:</span>
@@ -147,7 +147,7 @@ useEffect(() => {
         </CardContent>
         <CardFooter>
           <Button
-            className="w-full bg-orange-500 hover:bg-orange-600"
+            className="w-full bg-iris hover:bg-irisdark"
             onClick={() => router.push("/dashboard")}
             disabled={isLoading}
           >
@@ -164,11 +164,9 @@ useEffect(() => {
                 Código Promocional
               </label>
               <Input
-                id="promoCode"
-                placeholder="ej. ORANGE2025"
+                placeholder="ej. LAVANDA2025"
                 value={promoCode}
-                onChange={(e) => setPromoCode(e.target.value)}
-                autoFocus
+                onChange={(e) => setPromoCode(e)}
               />
             </div>
           );
@@ -180,9 +178,9 @@ useEffect(() => {
         animate={{ y: 0, opacity: 1 }}
         transition={{ type: "spring", stiffness: 120 }}
       >
-        <Card className="shadow-sm">
+        <Card className="shadow-sm px-4 py-5 p-2">
           <CardHeader>
-            <CardTitle className="text-orange-600">Canjea tu Código</CardTitle>
+            <CardTitle className="text-irisdark">Canjea tu Código</CardTitle>
             <CardDescription>
               Introduce tu código promocional para mejorar tu plan
             </CardDescription>
@@ -199,7 +197,7 @@ useEffect(() => {
           <CardFooter>
             <Button
               type="submit"
-              className="w-full bg-orange-500 hover:bg-orange-600"
+              className="w-full bg-iris hover:bg-irisdark"
               disabled={isLoading}
             >
               {isLoading ? "Reclamando..." : "Reclamar Código"}

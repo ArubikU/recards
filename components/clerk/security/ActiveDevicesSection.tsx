@@ -122,9 +122,9 @@ export const ActiveDevicesCard = () => {
                     <div className="flex flex-col w-full overflow-hidden">
                         <div className="flex flex-wrap justify-between items-center w-full gap-2">
                             <div className="font-medium truncate">{device.title}</div>
-                            {device.isCurrent && <Badge className="text-xs bg-gray-300">Actual</Badge>}
+                            {device.isCurrent && <Badge variant="defaultrounded" label="Actual"/>}
                         </div>
-                        <div className="text-sm text-gray-500 space-y-1 break-words">
+                        <div className="text-sm text-ink space-y-1 break-words">
                             <div>{device.browser}</div>
                             <div className="truncate">{device.ip} {device.location && `(${device.location})`}</div>
                             <div>{formatDate(device.lastActive)}</div>

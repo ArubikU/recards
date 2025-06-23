@@ -17,7 +17,7 @@ export default function UsernameSection() {
     const content = () => {
         if (updatingUserName) {
             return (
-                <div className="border rounded-xl p-6 shadow-sm bg-white w-full max-w-md">
+                <div className="border rounded-xl p-6 shadow-sm bg-ivory w-full max-w-md">
                     <h3 className="text-sm font-medium mb-4 text-gray-900">Update Username</h3>
                     <div className="mb-6">
                         <input
@@ -37,7 +37,7 @@ export default function UsernameSection() {
                             Cancel
                         </Button>
                         <Button
-                            className="bg-gray-800 rounded-xl text-white hover:bg-gray-600"
+                            className="bg-gray-800 rounded-xl text-white hover:bg-ink"
                             disabled={userName === (user.username || "")}
                             onClick={async () => {
                                 updateWithVerification({ username: userName })

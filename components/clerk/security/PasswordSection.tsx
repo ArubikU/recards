@@ -17,7 +17,7 @@ export default function PasswordSection() {
   const content = () => {
     if (updatingPassword) {
       return (
-        <div className="border rounded-xl p-6 shadow-sm bg-white">
+        <div className="border rounded-xl p-6 shadow-sm bg-ivory">
           <h3 className="text-sm font-medium mb-4 text-gray-900">
             Update Password
           </h3>
@@ -48,7 +48,7 @@ export default function PasswordSection() {
               Cancel
             </Button>
             <Button
-              className="bg-gray-800 rounded-xl text-white hover:bg-gray-600"
+              className="bg-gray-800 rounded-xl text-white hover:bg-ink"
               disabled={password === ""}
               onClick={async () => {
                 await user.updatePassword({

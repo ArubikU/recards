@@ -2,6 +2,7 @@
 import { getTierObject } from "@/lib/getLimits";
 import { onUpdateSettings } from "@/lib/updateUnsafe";
 import { useUser } from "@clerk/nextjs";
+import { CreditCard, Settings2 } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import CustomUserButton from "./custom-user-button";
@@ -66,7 +67,7 @@ export default function CustomUser({showName = false}: { showName?: boolean }) {
     return (<header>
         <CustomUserButton afterSignOutUrl="/" showName={showName}>
             {/* You can pass the content as a component */}
-            <CustomUserButton.UserProfilePage label="Settings" url="custom" labelIcon={<SettingsIcon />}>
+            <CustomUserButton.UserProfilePage label="Settings" url="custom" labelIcon={<Settings2 />}>
                 <div>
                     <h3 className="text-xl font-semibold mb-6">Configuración de la Cuenta</h3>
 
@@ -91,7 +92,7 @@ export default function CustomUser({showName = false}: { showName?: boolean }) {
                                 <label className="flex items-center">
                                     <input
                                         type="checkbox"
-                                        className="rounded text-[#FF7A00] focus:ring-[#FF7A00] h-4 w-4 mr-2"
+                                        className="rounded text-iris focus:ring-iris h-4 w-4 mr-2"
                                         checked={!!settings.emailNotifications}
                                         onChange={e => setSettings(prev => ({ ...prev, emailNotifications: e.target.checked }))}
                                     />
@@ -100,7 +101,7 @@ export default function CustomUser({showName = false}: { showName?: boolean }) {
                                 <label className="flex items-center">
                                     <input
                                         type="checkbox"
-                                        className="rounded text-[#FF7A00] focus:ring-[#FF7A00] h-4 w-4 mr-2"
+                                        className="rounded text-iris focus:ring-iris h-4 w-4 mr-2"
                                         checked={!!settings.productUpdates}
                                         onChange={e => setSettings(prev => ({ ...prev, productUpdates: e.target.checked }))}
                                     />
@@ -113,7 +114,7 @@ export default function CustomUser({showName = false}: { showName?: boolean }) {
                     {/* Guardar cambios */}
                     <div className="mt-8">
                         <button
-                            className="bg-[#FF7A00] text-white px-6 py-2 rounded font-medium hover:bg-[#e66a00] transition"
+                            className="bg-iris text-white px-6 py-2 rounded font-medium hover:bg-irisdark transition"
                             onClick={() => {
                                 onUpdateSettings(settings, user)
                             }}
@@ -123,7 +124,7 @@ export default function CustomUser({showName = false}: { showName?: boolean }) {
                     </div>
                 </div>
             </CustomUserButton.UserProfilePage>
-            <CustomUserButton.UserProfilePage label="Plan" url="billing" labelIcon={<BillingIcon />}>
+            <CustomUserButton.UserProfilePage label="Plan" url="billing" labelIcon={<CreditCard />}>
                 <div>
                     <div className="flex  items-center mb-6">
                         <h3 className="text-xl font-semibold">Plan Actual</h3>
@@ -132,12 +133,12 @@ export default function CustomUser({showName = false}: { showName?: boolean }) {
                     <div className="bg-gray-50 rounded-lg p-4 mb-6">
                         <div className="flex justify-between items-center">
                             <div>
-                                <h4 className={`${userTier.isUltimate ? "text-gradient-orange-metallic" : ""} font-semibold text-lg `}>{userTier.formattedName}</h4>
+                                <h4 className={`${userTier.isUltimate ? "text-gradient-nootiq-metallic" : ""} font-semibold text-lg `}>{userTier.formattedName}</h4>
                             </div>
                             <div>
                                 
                             <span className="bg-green-100 text-green-800 text-xs font-medium px-2.5 py-0.5 rounded">Activo</span>
-                        <Link href="/pricing" className="px-4 text-[#FF7A00] hover:underline text-sm font-medium">
+                        <Link href="/pricing" className="px-4 text-iris hover:underline text-sm font-medium">
                             Cambiar Plan
                         </Link>
                             </div>
