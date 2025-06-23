@@ -71,7 +71,7 @@ Se almacena metadata personalizada como:
 * **Tailwind CSS**
 * **Framer Motion**
 * **Clerk (auth & metadata)**
-* **OpenAI** (IA para generar contenido)
+* **Cohere** (IA para generar contenido)
 * **Vercel** para el hosting
 
 ---
